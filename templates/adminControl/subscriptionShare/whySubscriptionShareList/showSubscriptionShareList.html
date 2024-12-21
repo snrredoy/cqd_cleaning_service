@@ -4,58 +4,46 @@
 {% block general %}
 
 <div class="card mb-4">
-
-
     <div class="card-body">
-        <h1>Show Commercial Services</h1>
+        <h1>Show Subscription Share List</h1>
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th class="text-center">Services No</th>
-                    <th class="text-center">Services Icon</th>
-                    <th class="text-center">Services Wattermark</th>
-                    <th class="text-center">Services Title</th>
-                    <th class="text-center">Services Description</th>
-                    <th class="text-center">Section Title</th>
+                    <th class="text-center">Subscription No</th>
+                    <th class="text-center">Subscription Icon</th>
+                    <th class="text-center">Subscription Title</th>
+                    <th class="text-center">Subscription Description</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for commercialService in commercialServices %}
+                {% for whySubscriptionShareList in whySubscriptionShareLists %}
                 <tr>
                     <td class="text-center">{{ forloop.counter }}</td>
                     <td class="d-flex justify-content-center align-items-center">
-                        <div class="shadow bg-body-tertiary rounded" style="width: 80px; height: 60px;">
-                            <img src="{{ commercialService.icon.url }}" alt="Image of Commercial Service"
+                        <div class="shadow bg-body-tertiary rounded" style="width: 80px; height: 60.5px;">
+                            <img src="{{ whySubscriptionShareList.icon.url }}" alt="Image of Subscription Share"
                                 style="width: 100%; height: 100%;">
                         </div>
                     </td>
+                    <td class="text-center">{{ whySubscriptionShareList.modelTitle }}</td>
+                    <td class="text-center">{{ whySubscriptionShareList.modelDescription }}</td>
                     <td class="text-center">
-
-                        <img class="shadow p-3 bg-body-tertiary rounded"
-                            src="{{ commercialService.wattermarkIcon.url }}" alt="Image of Commercial Service"
-                            style="width: 80px; height: 60px;">
-                    </td>
-
-                    <td class="text-center">{{ commercialService.serviceTitle }}</td>
-                    <td class="text-center">{{ commercialService.description }}</td>
-                    <td class="text-center">{{ commercialService.mainTitle }}</td>
-                    <td class="text-center">
-                        <a href="{% url 'updateCommercialServices' commercialService.pk %}">
+                        <a href="{% url 'updateWhySubscriptionShareList' whySubscriptionShareList.id %}">
                             <button class="btn btn-primary">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                         </a>
 
-                        <a href="{% url 'deleteCommercialServices' commercialService.pk %}">
+                        <a href="{% url 'deleteWhySubscriptionShareList' whySubscriptionShareList.id %}">
                             <button class="btn btn-danger">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </a>
                     </td>
-
                 </tr>
-                {% endfor %}
+            </tbody>
+            {% endfor %}
         </table>
     </div>
 </div>

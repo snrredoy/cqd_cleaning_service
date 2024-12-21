@@ -1,0 +1,31 @@
+{% extends 'adminControl/adminBase.html' %}
+{% load static %}
+
+{% block general %}
+<div class="card mb-4">
+    <h5 class="card-header">Subscription Share Details</h5>
+
+    <div class="card-body">
+        <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <hr class="mb-4" />
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="title" class="form-label">title</label>
+                    <input class="form-control" type="text" id="title" name="title" placeholder="Title here"
+                        value="{{ whySubscriptionShareForm.title.value }}" autofocus />
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="subTitle" class="form-label">sub title</label>
+                    <input class="form-control" type="text" id="subTitle" name="subTitle" placeholder="Sub Title here"
+                        value="{{ whySubscriptionShareForm.subTitle.value }}" autofocus />
+                </div>
+                <div class="mt-2">
+                    <button id="submitBtn" type="submit" class="btn btn-primary me-2">Update</button>
+                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

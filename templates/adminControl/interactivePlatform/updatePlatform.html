@@ -2,27 +2,21 @@
 {% load static %}
 
 {% block general %}
-
 <div class="card mb-4">
-    <h5 class="card-header">Trusted Partner Details</h5>
+    <h5 class="card-header">Update Interactive Platform</h5>
 
     <div class="card-body">
         <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {% if error_message %}
-            <div class="alert alert-danger" role="alert">
-                {{ error_message }}
-            </div>
-            {% else %}
             <div class="card-body">
                 <div class="d-flex align-items-start align-items-sm-center gap-4">
-                    <img src="http://127.0.0.1:8000/media/{{ trustedForm.partner_one.value }}" alt="user-avatar"
+                    <img src="http://127.0.0.1:8000/media/{{ interactivePlatformForm.image.value }}" alt="use-image"
                         class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                     <div class="button-wrapper">
-                        <label for="partner_one" class="btn btn-primary me-2 mb-4" tabindex="0">
-                            <span class="d-none d-sm-block">Upload Partner Logo</span>
+                        <label for="image" class="btn btn-primary me-2 mb-4" tabindex="0">
+                            <span class="d-none d-sm-block">Upload Image</span>
                             <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input type="file" id="partner_one" name="partner_one" class="account-file-input" hidden
+                            <input type="file" id="image" name="image" class="account-file-input" hidden
                                 accept="image/png, image/jpeg" />
                         </label>
                         <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
@@ -34,13 +28,13 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-2">
-                <button type="submit" class="btn btn-primary me-2">Update Partner</button>
-                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+            <hr class="mb-4" />
+            <div class="row">
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary me-2">Update</button>
+                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                </div>
             </div>
-            {% endif %}
         </form>
     </div>
-</div>
-
-{% endblock %}
+    {% endblock %}

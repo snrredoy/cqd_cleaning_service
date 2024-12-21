@@ -19,7 +19,15 @@ urlpatterns = [
 
     path("showInteractivePlatform/", views.showInteractivePlatform , name="showInteractivePlatform"),
     path("updateInteractivePlatform/<int:pk>/", views.updateInteractivePlatform , name="updateInteractivePlatform"),
-    # path("updateInteractivePlatform/<int:platform>/", views.updateInteractivePlatform , name="updateInteractivePlatform"),
+    path("updateInteractivePlatformList/<int:pk>/", views.updateInteractivePlatformList , name="updateInteractivePlatformList"),
+    path("deleteInteractivePlatformList/<int:pk>/", views.deleteInteractivePlatformList , name="deleteInteractivePlatformList"),
+
+
+    path("updateWhySubscriptionShare/<int:pk>/", views.updateWhySubscriptionShare , name="updateWhySubscriptionShare"),
+
+    path("showWhySubscriptionShareList/", views.showWhySubscriptionShareList , name="showWhySubscriptionShareList"),
+    path("updateWhySubscriptionShareList/<int:pk>/", views.updateWhySubscriptionShareList , name="updateWhySubscriptionShareList"),
+    path("deleteWhySubscriptionShareList/<int:pk>/", views.deleteWhySubscriptionShareList , name="deleteWhySubscriptionShareList"),
 
 ]
 

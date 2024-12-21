@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render , get_object_or_404
-from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList
-from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , InteractivePlatformForm , InteractivePlatformListForm
+from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList
+from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , InteractivePlatformForm , InteractivePlatformListForm , WhySubscriptionShareForm , WhySubscriptionShareListForm
+
 
 # Create your views here.
 def dashboard(request):
@@ -130,7 +131,31 @@ def showInteractivePlatform(request):
     return render(request, 'adminControl/interactivePlatform/showInteractivePlatform.html' , context = context)
 
 def updateInteractivePlatform(request, pk):
-    instance = get_object_or_404(InteractivePlatformList, pk=pk)
+    instance = InteractivePlatform.objects.get( pk=pk )
+    if request.method == 'POST':
+        interactivePlatformForm = InteractivePlatformForm(request.POST, request.FILES, instance=instance)
+        if interactivePlatformForm.is_valid():
+            interactivePlatformForm.save()
+            return redirect('showInteractivePlatform')
+    else:
+        interactivePlatformForm = InteractivePlatformForm(instance=instance)
+
+    form = GeneralForm(instance=General.objects.first())
+
+    interactivePlatforms = InteractivePlatform.objects.all()
+
+    context = {
+        'form': form,
+        'interactivePlatformForm': interactivePlatformForm,
+        'interactivePlatforms': interactivePlatforms,
+        'title': 'Update Interactive Platform',
+        'breadcrumb': 'Interactive Platform Settings'
+    }
+
+    return render(request, 'adminControl/interactivePlatform/updatePlatform.html', context=context)
+
+def updateInteractivePlatformList(request, pk):
+    instance = InteractivePlatformList.objects.get( pk=pk )
     if request.method == 'POST':
         interactivePlatformListForm = InteractivePlatformListForm(request.POST, request.FILES, instance=instance)
         if interactivePlatformListForm.is_valid():
@@ -152,3 +177,70 @@ def updateInteractivePlatform(request, pk):
     }
 
     return render(request, 'adminControl/interactivePlatform/update.html', context=context)
+
+def deleteInteractivePlatformList(request , pk):
+    instance = InteractivePlatform.objects.get( pk=pk)
+    instance.delete()
+    return redirect('showInteractivePlatform')
+
+
+def updateWhySubscriptionShare(request , pk):
+    instance = WhySubscriptionShare.objects.get( pk=pk )
+    if request.method == 'POST':
+        whySubscriptionShareForm = WhySubscriptionShareForm(request.POST, request.FILES, instance=instance)
+        if whySubscriptionShareForm.is_valid():
+            whySubscriptionShareForm.save()
+            return redirect('updateWhySubscriptionShare', pk=pk)
+    else:
+        whySubscriptionShareForm = WhySubscriptionShareForm(instance=instance)
+
+    form = GeneralForm(instance=General.objects.first())
+    context = {
+        'form': form,
+        'whySubscriptionShareForm': whySubscriptionShareForm,
+        'alert' : "Update Successful",
+        'title': 'Update Why Subscription Share',
+        'breadcrumb': 'Subscription Share Settings'
+    }
+
+    return render(request, 'adminControl/subscriptionShare/whySubscriptionShare/update.html', context=context)
+
+
+def showWhySubscriptionShareList(request):
+    form = GeneralForm(instance=General.objects.first())
+    whySubscriptionShareList = WhySubscriptionShareList.objects.all()
+
+    context = {
+        'form': form,
+        'whySubscriptionShareLists': whySubscriptionShareList,
+        'title': 'Subscription Share List',
+        'breadcrumb': 'Subscription Share Settings'
+    }
+
+    return render(request ,'adminControl\subscriptionShare\whySubscriptionShareList\showSubscriptionShareList.html', context=context)
+
+def updateWhySubscriptionShareList(request , pk):
+    instance = WhySubscriptionShareList.objects.get( pk=pk )
+    if request.method == 'POST':
+        whySubscriptionShareListForm = WhySubscriptionShareListForm(request.POST, request.FILES, instance=instance)
+        if whySubscriptionShareListForm.is_valid():
+            whySubscriptionShareListForm.save()
+            return redirect('showWhySubscriptionShareList')
+    else:
+        whySubscriptionShareListForm = WhySubscriptionShareListForm(instance=instance)    
+
+    form = GeneralForm(instance=General.objects.first())
+    context = {
+        'form': form,
+        'whySubscriptionShareListForm': whySubscriptionShareListForm,
+        'title': 'Update Subscription Share List',
+        'breadcrumb': 'Subscription Share Settings'
+    }
+
+    return render(request, 'adminControl/subscriptionShare/whySubscriptionShareList/update.html', context=context)
+
+
+def deleteWhySubscriptionShareList(request , pk):
+    instance = WhySubscriptionShareList.objects.get( pk=pk)
+    instance.delete()
+    return redirect('showWhySubscriptionShareList')

@@ -1,4 +1,4 @@
-from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList
+from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList
 from django import forms
 
 class GeneralForm(forms.ModelForm):
@@ -28,4 +28,16 @@ class InteractivePlatformForm(forms.ModelForm):
 class InteractivePlatformListForm(forms.ModelForm):
     class Meta:
         model = InteractivePlatformList
+        fields = '__all__'
+
+
+class WhySubscriptionShareForm(forms.ModelForm):
+    class Meta:
+        model = WhySubscriptionShare
+        fields = '__all__'
+
+
+class WhySubscriptionShareListForm(forms.ModelForm):
+    class Meta:
+        model = WhySubscriptionShareList
         fields = '__all__'

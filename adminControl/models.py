@@ -44,3 +44,18 @@ class InteractivePlatformList(models.Model):
         return self.title
 
 
+class WhySubscriptionShare(models.Model):
+    title = models.CharField(max_length=100, null=True, blank=True)
+    subTitle = models.CharField(max_length=100, null=True, blank=True)
+
+
+    def __str__(self):
+        return self.title
+    
+class WhySubscriptionShareList(models.Model):
+    icon = models.ImageField(upload_to='subscriptionIcon/', null=True, blank=True)
+    modelTitle = models.CharField(max_length=100, null=True, blank=True)
+    modelDescription = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.modelTitle
