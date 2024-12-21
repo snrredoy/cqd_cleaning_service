@@ -1,0 +1,49 @@
+{% load static %}
+
+<div class="h-[70vh] w-[97%] mt-8 mx-[30px] rounded-3xl flex justify-center items-center bg-gradient-to-b from-blue-100 to-blue-200"
+    ;>
+
+    <div
+        class="flex flex-col items-center justify-center py-12 bg-gradient-to-b from-blue-100 to-blue-200 rounded-3xl w-10/12">
+        <h2 class="text-sm text-blue-600 mb-2">Introducing a New Way</h2>
+        <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">To Access Commercial Cleaning Services</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl px-6 md:px-0">
+
+            <!-- Card 1 -->
+            {% for commercialService in commercialServices %}
+            <div class="bg-white rounded-xl p-6 shadow-lg flex flex-col items-center">
+                <!-- Icons with Horizontal Dash -->
+                <div class="flex items-center justify-center mb-2 ms-auto">
+                    <!-- Icon 1 -->
+                    <div class="bg-blue-100 p-2 rounded-full w-[64px] h-[64px] flex items-center justify-center">
+                        <img src="{{ commercialService.icon.url }}" alt="icon">
+                    </div>
+                    <!-- Dash -->
+                    <div class="w-10 h-0.5 bg-gray-300 mx-4"></div>
+                    <!-- Icon 2 -->
+                    <div class="w-[98.969px] h-[98.969px] relative right-[20px] top-[5px] z-10">
+                        <img src="{{ commercialService.wattermarkIcon.url }}" alt="icon">
+                    </div>
+                </div>
+                <h3 class="font-semibold text-lg text-gray-900 mb-2 text-center">{{ commercialService.serviceTitle }}
+                </h3>
+                <p class="text-center text-gray-500 mb-2">{{ commercialService.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="flex mt-8">
+            <button class="bg-[#02B71F] py-2 rounded-full text-white flex justify-between px-4">
+                {{ generalData.buttonText }}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
+                    class="ml-1">
+                    <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
+                    <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
+                    <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />
+                    <path d="M5 12.5H19M19 12.5L13 18.5M19 12.5L13 6.5" stroke="#EEFFEF" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+    </div>

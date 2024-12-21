@@ -1,0 +1,54 @@
+{% load static %}
+
+<nav class="bg-[#0F2A5C] mt-4 p-4 rounded-full flex justify-between w-[98%] mx-4">
+  <div class=" flex items-center">
+    <a href="#" class="">
+      <img src="http://127.0.0.1:8000/{{ generalData.navLogo.url }}" class="h-8" alt="CQD Logo" />
+    </a>
+  </div>
+  <!-- navbar options -->
+  <div id="navbarOptions" class="text-white flex justify-evenly items-center w-1/2">
+    <a href="">Home</a>
+    <a href="">About Us</a>
+    <div class="dropdown">
+      <div>
+        <button type="button" class="flex justify-center items-center drdwbtn" id="menu-button">Service
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none"
+            class="pt-1 -mr-1 size-5 text-gray-400">
+            <path d="M5.45459 7.25L9.95459 11.75L14.4546 7.25" stroke="#F5FBFF" stroke-width="1.66667"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="drdwContent z-40">
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700" id="menu-item-0">Account settings</a>
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700" id="menu-item-1">Support</a>
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700" id="menu-item-2">License</a>
+      </div>
+    </div>
+    <a href="">Pricing</a>
+    <a href="">Career</a>
+    <a href="">Blog</a>
+    <a href="">Contact</a>
+  </div>
+
+  <!-- navbar end -->
+
+  <div class="flex">
+    <button class="bg-[#02B71F] py-2 rounded-full text-white flex justify-between px-4">
+      {{ generalData.buttonText }}
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none" class="ml-1">
+        <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
+        <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
+        <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />
+        <path d="M5 12.5H19M19 12.5L13 18.5M19 12.5L13 6.5" stroke="#EEFFEF" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
+</nav>
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>

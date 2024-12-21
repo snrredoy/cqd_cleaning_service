@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ generalData.title }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/mainBody.css' %}" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8000/media/{{ generalData.favicon }}">
+  <!--/ Favicon -->
+  {% block link %} {% endblock %}
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <header>
+    {% include 'navbar/navbar.html' %}
+  </header>
+  <main>
+    <div class="HeroSection">
+      {% include 'mainBody/mainBody.html' %}
+    </div>
+    <div class="trustedPartner">
+      {% include 'trustedPartner/showTrustedPartner.html' %}
+    </div>
+    <div class="commercialServices">
+      {% include 'commercialServices/commercialServices.html' %}
+    </div>
+    <div class="interactivePlatform">
+      {% include 'interactivePlatform/interactivePlatform.html' %}
+    </div>
+  </main>
+</body>
+
+</html>

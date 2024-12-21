@@ -1,0 +1,123 @@
+{% extends 'adminControl/adminBase.html' %}
+{% load static %}
+
+{% block general %}
+<div class="card mb-4">
+    <h5 class="card-header">General Details</h5>
+    <!-- Account -->
+
+    <div class="card-body">
+        <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="d-flex">
+
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img src="http://127.0.0.1:8000/media/{{ form.favicon.value }}" alt="user-avatar"
+                            class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                        <div class="button-wrapper">
+                            <label for="favicon" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Upload Favicon</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="favicon" name="favicon" class="account-file-input" hidden
+                                    accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Reset</span>
+                            </button>
+
+                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img src="http://127.0.0.1:8000/media/{{ form.navLogo.value }}" alt="user-avatar"
+                            class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                        <div class="button-wrapper">
+                            <label for="navLogo" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Upload Nav logo</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="navLogo" name="navLogo" class="account-file-input" hidden
+                                    accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Reset</span>
+                            </button>
+
+                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img src="http://127.0.0.1:8000/media/{{ form.banner.value }}" alt="user-avatar"
+                            class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                        <div class="button-wrapper">
+                            <label for="banner" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Upload Banner</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="banner" name="banner" class="account-file-input" hidden
+                                    accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Reset</span>
+                            </button>
+
+                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="mb-4" />
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="title" class="form-label">title</label>
+                    <input class="form-control" type="text" id="title" name="title" placeholder="John"
+                        value="{{ form.title.value}}" autofocus />
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label class="form-label" for="phoneNumber">Phone Number</label>
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text">BD (+88)</span>
+                        <input type="text" id="phoneNumber" name="contact" class="form-control"
+                            placeholder="00000-000000" value="{{ form.contact.value }}" />
+                    </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="buttonText" class="form-label">Button Text</label>
+                    <input type="text" class="form-control" id="address" name="buttonText" placeholder="Button Text"
+                        value="{{ form.buttonText.value }}" />
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Address"
+                        value="{{ form.address.value }}" />
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="state" class="form-label">State</label>
+                    <input class="form-control" type="text" id="state" name="state" placeholder="California"
+                        value="{{ form.state.value }}" />
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="zipCode" class="form-label">Zip Code</label>
+                    <input type="text" class="form-control" id="zipCode" name="zipCode" value="{{ form.zipCode.value }}"
+                        placeholder="1234" maxlength="6" />
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="state" class="form-label">City</label>
+                    <input class="form-control" type="text" id="state" name="city" placeholder="Dhaka"
+                        value="{{ form.city.value }}" />
+                </div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endblock %}

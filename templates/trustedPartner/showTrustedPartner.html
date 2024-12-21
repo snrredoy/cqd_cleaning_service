@@ -1,0 +1,16 @@
+{% load static %}
+
+<div class="bg-white py-12 rounded-3xl w-[97%] mx-[30px]">
+    <div class="w-full">
+        <!-- Trusted Partners Logos -->
+        <h1 class="text-2xl font-bold mb-8 text-center">Our Trusted Partners</h1>
+        <div class="flex justify-between items-center w-full">
+            {% for trustedPartner in trustedPartners %}
+            <div class="flex-grow">
+                <img src="{{ trustedPartner.partner_one.url }}" alt="Trusted Partner Logo"
+                    class="h-24 w-full object-contain" />
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

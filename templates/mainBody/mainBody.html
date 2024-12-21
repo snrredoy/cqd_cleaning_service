@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="mainBody h-[80vh] w-[97%] mt-8 mx-[30px] ">
+  <div class="heroGradientImg h-full w-full rounded-3xl relative">
+    <img class="bg-cover w-full h-full rounded-3xl heroImage" src="http://127.0.0.1:8000/{{ generalData.banner.url }}"
+      alt="Hero Image" />
+    <div class="absolute top-0 left-0 h-full w-full z-20 rounded-3xl" style="background: linear-gradient(
+          90deg,
+          rgba(4, 89, 229, 0.7) 23.07%,
+          rgba(79, 186, 255, 0.07) 117.66%
+        );">
+    </div>
+  </div>
+  <div class="heroText absolute top-[35%] left-[10%] z-40 flex flex-col justify-between h-[30%]">
+    <h1 class="text-4xl font-bold text-white mt-4">
+      CQD's Interactive <br />
+      Subscription sharing <br />
+      Process
+    </h1>
+    <p class="text-white mt-4">
+      Revolutionizing the Commercial Cleaning Industry in 2025.
+    </p>
+
+    <button class="bg-[#02B71F] py-2 rounded-full text-white flex justify-between px-4 w-[180px]">
+      {{ generalData.buttonText}}
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none" class="ml-1">
+        <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
+        <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
+        <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />
+        <path d="M5 12.5H19M19 12.5L13 18.5M19 12.5L13 6.5" stroke="#EEFFEF" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
+  </div>
+</div>
