@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", views.dashboard , name="dashboard"),
+    
     path("update/<int:pk>/", views.updateGeneralSetting , name="updateGeneralSetting"),
 
     path("addTrustedPartner/", views.addTrustedPartner , name="addTrustedPartner"),
@@ -27,7 +28,6 @@ urlpatterns = [
 
     path("showWhySubscriptionShareList/", views.showWhySubscriptionShareList , name="showWhySubscriptionShareList"),
     path("updateWhySubscriptionShareList/<int:pk>/", views.updateWhySubscriptionShareList , name="updateWhySubscriptionShareList"),
-    path("deleteWhySubscriptionShareList/<int:pk>/", views.deleteWhySubscriptionShareList , name="deleteWhySubscriptionShareList"),
 
 ]
 

@@ -1,0 +1,16 @@
+.menu-link.active {
+    background-color: #e7e7ff;
+    color: #0459E5;
+}
+
+.menu-link.active i {
+    color: #0459E5;
+}
+
+.menu-link.active div {
+    font-weight: bold;
+}
+
+.menu-item.active {
+    color: #0459E5;
+}

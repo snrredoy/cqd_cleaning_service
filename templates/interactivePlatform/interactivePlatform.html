@@ -1,9 +1,9 @@
 {% load static %}
-<div class="bg-blue-50 py-16 rounded-3xl w-[97%] mx-[30px]">
+<div class="bg-[#fff] py-16 rounded-3xl w-[97%] mx-[30px] px-[262px] py-[120px]">
     <div class="container mx-auto flex flex-col lg:flex-row items-center lg:justify-between px-48">
         <!-- Left Section (Image) -->
         <div class="lg:w-2/4 w-full mb-8 lg:mb-0">
-            <div class="w-full max-w-lg"> <!-- Adjust the size using Tailwind classes -->
+            <div class="w-full self-stretch max-w-lg">
                 <img src="{{ interactivePlatforms.image.url }}" alt="Interactive Platform"
                     class="rounded-lg shadow-lg object-cover w-full h-88" />
             </div>
@@ -19,8 +19,9 @@
             <div class="space-y-6">
                 <!-- Feature -->
                 {% for interactivePlatformList in interactivePlatformLists %}
-                <div class="flex items-start">
-                    <div class="w-12 h-12 bg-blue-100 flex items-center justify-center rounded-full">
+                <div class="flex items-center self-stretch rounded-xl bg-[#EDF8FF]">
+                    <div
+                        class="flex w-16 h-16 p-4 justify-center items-center rounded-[59.733px] border border-[#0459E5]">
                         <img src="{{ interactivePlatformList.icon.url }}" alt="Feature Icon" class="w-6 h-6">
                     </div>
                     <div class="ml-4">

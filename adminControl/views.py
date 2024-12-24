@@ -1,6 +1,7 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render , get_object_or_404
-from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList
-from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , InteractivePlatformForm , InteractivePlatformListForm , WhySubscriptionShareForm , WhySubscriptionShareListForm
+from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList , SubscriptionPackage
+from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , InteractivePlatformForm , InteractivePlatformListForm , WhySubscriptionShareForm , WhySubscriptionShareListForm , SubscriptionPackageForm
 
 
 # Create your views here.
@@ -15,14 +16,17 @@ def updateGeneralSetting(request , pk):
     instance = get_object_or_404(General, pk=pk)
     if request.method == 'POST':
         form = GeneralForm(request.POST, request.FILES , instance= instance)
-        print(form)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Update Successful')
+            return redirect('updateGeneralSetting', pk =10)
+        else:
+            messages.error(request, 'Update Failed , Please Check the form again')
             return redirect('updateGeneralSetting', pk =10)
     else:
         form = GeneralForm(instance=instance)
 
-    return render(request, 'adminControl/generalSetting/update.html' , {'form': form , 'title': 'General' , 'breadcrumb': 'General Setting'})
+    return render(request, 'adminControl/generalSetting/update.html' , {'form': form , 'title': 'Update General Setting' , 'breadcrumb': 'General Setting'})
 
 
 
@@ -32,12 +36,16 @@ def addTrustedPartner(request):
         partner_count = TrustedPartner.objects.count()
 
         if partner_count >= 8:
-            error_message = "You cannot upload more than 8 Trusted Partners."
-            return render(request, 'adminControl/trustedPartner/create.html', {'error_message': error_message})
+            messages.error(request, "You cannot upload more than 8 Trusted Partners.")
+            return redirect('showTrustedPartners')
 
         trustedForm = TrustedPartnerForm(request.POST , request.FILES)
         if trustedForm.is_valid():
             trustedForm.save()
+            messages.success(request, 'Partner Added Successfully')
+            return redirect('showTrustedPartners')
+        else:
+            messages.error(request, 'Partner Adding Failed , Please Check the form again')
             return redirect('showTrustedPartners')
     else:
         trustedForm = TrustedPartnerForm()
@@ -58,6 +66,10 @@ def updateTrustedPartner(request , pk):
         trustedForm = TrustedPartnerForm(request.POST , request.FILES , instance= instance)
         if trustedForm.is_valid():
             trustedForm.save()
+            messages.success(request, 'Partner Update Successful')
+            return redirect('showTrustedPartners')
+        else:
+            messages.error(request, 'Partner Update Failed , Please Check the form again')
             return redirect('showTrustedPartners')
     else:
         trustedForm = TrustedPartnerForm(instance=instance)
@@ -69,6 +81,7 @@ def updateTrustedPartner(request , pk):
 def deleteTrustedPartner(request , pk):
     instance = get_object_or_404(TrustedPartner, pk=pk)
     instance.delete()
+    messages.success(request, 'Partner Deleted Successfully')
     return redirect('showTrustedPartners')
 
 
@@ -239,8 +252,15 @@ def updateWhySubscriptionShareList(request , pk):
 
     return render(request, 'adminControl/subscriptionShare/whySubscriptionShareList/update.html', context=context)
 
+def showWhySubscriptionPackages(request):
+    form = GeneralForm(instance=General.objects.first())
+    subscriptionPackages = SubscriptionPackage.objects.all()
 
-def deleteWhySubscriptionShareList(request , pk):
-    instance = WhySubscriptionShareList.objects.get( pk=pk)
-    instance.delete()
-    return redirect('showWhySubscriptionShareList')
+    context = {
+        'form': form,
+        'subscriptionPackages': subscriptionPackages,
+        'title': 'Subscription Packages',
+        'breadcrumb': 'Subscription Package Settings'
+    }
+
+    return render(request ,'adminControl\subscriptionPackage\showSubscriptionPackages.html', context=context)

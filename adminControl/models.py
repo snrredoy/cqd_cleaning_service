@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxLengthValidator
 
 # Create your models here.
 class General(models.Model):
@@ -6,11 +7,11 @@ class General(models.Model):
     navLogo = models.ImageField(upload_to='logo/', null=True, blank=True)
     banner = models.ImageField(upload_to='banner/', null=True, blank=True)
     title = models.CharField(max_length=100, null=True, blank=True)
-    contact = models.CharField(max_length=100, null=True, blank=True)
+    contact = models.IntegerField(MaxLengthValidator(15, "Contact number must be 15 digits long."), null=True, blank=True)
     buttonText = models.CharField(max_length=100, null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
     state= models.CharField(max_length=100, null=True, blank=True)
-    zipCode= models.CharField(max_length=100, null=True, blank=True)
+    zipCode= models.IntegerField(MaxLengthValidator(6, "Zip code must be 6 digits long."), null=True, blank=True)
     city= models.CharField(max_length=100, null=True, blank=True)
 
 
@@ -59,3 +60,13 @@ class WhySubscriptionShareList(models.Model):
 
     def __str__(self):
         return self.modelTitle
+    
+
+class SubscriptionPackage(models.Model):
+    packageIcon = models.ImageField(upload_to='subscriptionPackageIcon/', null=True, blank=True)
+    packageName = models.CharField(max_length=100, null=True, blank=True)
+    packagePrice = models.CharField(max_length=100, null=True, blank=True)
+    minimumClient = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.packageName

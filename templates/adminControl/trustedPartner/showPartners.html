@@ -8,10 +8,15 @@
 
     <div class="card-body">
         <h1>Show Trusted Partners</h1>
+        <div class="float-end mb-3">
+            <a href="{% url 'addTrustedPartner' %}">
+                <button class="btn btn-info">Add Trusted Partner</button>
+            </a>
+        </div>
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th class="text-center">Partners No</th>
+                    <th class="text-center w-px-20">Partner No</th>
                     <th class="text-center">Partners Logo</th>
                     <th class="text-center">Actions</th>
                 </tr>
@@ -20,9 +25,12 @@
                 {% for trustedPartner in trustedPartners %}
                 <tr>
                     <td class="text-center">{{ forloop.counter }}</td>
-                    <td class="text-center"><img class="shadow p-3 bg-body-tertiary rounded"
-                            src="{{ trustedPartner.partner_one.url }}" alt="Image of Trusted Partner"
-                            style="width: 150px; height: 80px;"></td>
+                    <td class="d-flex justify-content-center align-items-center">
+                        <div class="shadow p-3 bg-body-tertiary rounded">
+                            <img class="" src=" {{ trustedPartner.partner_one.url }}" alt="Image of Trusted Partner"
+                                style="width: 100px;">
+                        </div>
+                    </td>
 
                     <td class="text-center">
                         <a href="{% url 'updateTrustedPartner' trustedPartner.pk %}">
@@ -43,6 +51,24 @@
         </table>
     </div>
 </div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% else %}bg-success text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Notification</div>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
 
 
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
