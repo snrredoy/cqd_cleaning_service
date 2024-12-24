@@ -55,14 +55,19 @@
             <hr class="mb-4" />
             <div class="row">
                 <div class="mb-3 col-md-6">
-                    <label for="title" class="form-label">title</label>
-                    <input class="form-control" type="text" id="title" name="title" placeholder="Title here"
-                        value="{{ commercialServicesForm.title.value }}" autofocus />
+                    <label for="serviceTitle" class="form-label">Service title</label>
+                    <input class="form-control" type="text" id="serviceTitle" name="serviceTitle"
+                        placeholder="Title here" value="{{ commercialServicesForm.serviceTitle.value }}" autofocus />
                 </div>
                 <div class="mb-3 col-md-6">
                     <label for="description" class="form-label">Description</label>
                     <input type="text" class="form-control" id="description" name="description"
                         placeholder="Description" value="{{ commercialServicesForm.description.value }}" />
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="mainTitle" class="form-label">Section title</label>
+                    <input class="form-control" type="text" id="mainTitle" name="mainTitle" placeholder="Title here"
+                        value="{{ commercialServicesForm.mainTitle.value }}" autofocus />
                 </div>
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary me-2">Update</button>

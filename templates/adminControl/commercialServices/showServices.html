@@ -8,6 +8,11 @@
 
     <div class="card-body">
         <h1>Show Commercial Services</h1>
+        <div class="float-end mb-3">
+            <a href="{% url 'addCommercialServices' %}">
+                <button class="btn btn-info">Add Commercial Service</button>
+            </a>
+        </div>
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
@@ -25,21 +30,21 @@
                 <tr>
                     <td class="text-center">{{ forloop.counter }}</td>
                     <td class="d-flex justify-content-center align-items-center">
-                        <div class="shadow bg-body-tertiary rounded" style="width: 80px; height: 60px;">
+                        <div class="shadow bg-body-tertiary rounded p-3" style="width: 70px;">
                             <img src="{{ commercialService.icon.url }}" alt="Image of Commercial Service"
-                                style="width: 100%; height: 100%;">
+                                style="width: 100%;">
                         </div>
                     </td>
-                    <td class="text-center">
-
-                        <img class="shadow p-3 bg-body-tertiary rounded"
-                            src="{{ commercialService.wattermarkIcon.url }}" alt="Image of Commercial Service"
-                            style="width: 80px; height: 60px;">
+                    <td class="">
+                        <div class="shadow bg-body-tertiary rounded p-1" style="width: 70px;">
+                            <img src="{{ commercialService.wattermarkIcon.url }}" alt="Commercial Service Wattermark"
+                                style="width: 100%;">
+                        </div>
                     </td>
 
-                    <td class="text-center">{{ commercialService.serviceTitle }}</td>
-                    <td class="text-center">{{ commercialService.description }}</td>
-                    <td class="text-center">{{ commercialService.mainTitle }}</td>
+                    <td class="">{{ commercialService.serviceTitle }}</td>
+                    <td class="">{{ commercialService.description }}</td>
+                    <td class="">{{ commercialService.mainTitle }}</td>
                     <td class="text-center">
                         <a href="{% url 'updateCommercialServices' commercialService.pk %}">
                             <button class="btn btn-primary">
@@ -60,6 +65,23 @@
     </div>
 </div>
 
+{% if messages %}
+{% for message in messages %}
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% else %}bg-success text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Notification</div>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
 
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

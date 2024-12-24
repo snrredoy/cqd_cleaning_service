@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render , get_object_or_404
-from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList , SubscriptionPackage
-from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , InteractivePlatformForm , InteractivePlatformListForm , WhySubscriptionShareForm , WhySubscriptionShareListForm , SubscriptionPackageForm
+from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList 
+from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , InteractivePlatformForm , InteractivePlatformListForm , WhySubscriptionShareForm , WhySubscriptionShareListForm 
 
 
 # Create your views here.
@@ -92,6 +92,10 @@ def addCommercialServices(request):
         commercialServicesForm = CommercialServicesForm(request.POST , request.FILES)
         if commercialServicesForm.is_valid():
             commercialServicesForm.save()
+            messages.success(request, 'Service Added Successfully')
+            return redirect('showCommercialServices')
+        else:
+            messages.error(request, 'Service Adding Failed , Please Check the form again')
             return redirect('showCommercialServices')
     else:
         commercialServicesForm = CommercialServicesForm()
@@ -104,28 +108,40 @@ def showCommercialServices(request):
     form = GeneralForm(instance=General.objects.first())
     commercialServices  = CommercialServices.objects.all()
 
-    return render(request, 'adminControl/commercialServices/showServices.html' , {'form': form , 'commercialServices': commercialServices , 'title': 'Commercial Services' , 'breadcrumb': 'Commercial Service Settings'})
+    return render(request, 'adminControl/commercialServices/showServices.html' , {'form': form , 'commercialServices': commercialServices , 'title': 'Commercial Services' , 'breadcrumb': 'Commercial Service'})
 
 
 
 def updateCommercialServices(request , pk):
-    instance = get_object_or_404(CommercialServices, pk=pk)
+    instance = CommercialServices.objects.get(pk=pk)
     if request.method == 'POST':
         commercialServicesForm = CommercialServicesForm(request.POST , request.FILES , instance= instance)
         if commercialServicesForm.is_valid():
             commercialServicesForm.save()
+            messages.success(request, 'Service Update Successful')
+            return redirect('showCommercialServices')
+        else:
+            messages.error(request, 'Service Update Failed , Please Check the form again')
             return redirect('showCommercialServices')
     else:
         commercialServicesForm = CommercialServicesForm(instance=instance)
 
     form = GeneralForm(instance=General.objects.first())
 
-    return render(request, 'adminControl/commercialServices/update.html' , {'form': form , 'commercialServicesForm': commercialServicesForm , 'title': 'Update Commercial Service' , 'breadcrumb': 'Commercial Service Settings'})
+    context = {
+        'form': form,
+        'commercialServicesForm': commercialServicesForm,
+        'title': 'Update Commercial Service',
+        'breadcrumb': 'Commercial Service'
+    }
+
+    return render(request, 'adminControl/commercialServices/update.html' , context = context )
 
 
 def deleteCommercialServices(request , pk):
     instance = get_object_or_404(CommercialServices, pk=pk)
     instance.delete()
+    messages.success(request, 'Service Deleted Successfully')
     return redirect('showCommercialServices')
 
 def showInteractivePlatform(request):
@@ -138,44 +154,29 @@ def showInteractivePlatform(request):
         'interactivePlatforms': interactivePlatform,
         'interactivePlatformLists': interactivePlatformList,
         'title': 'Interactive Platform List',
-        'breadcrumb': 'Interactive Platform Settings'
+        'breadcrumb': 'Interactive Platform'
     }
 
     return render(request, 'adminControl/interactivePlatform/showInteractivePlatform.html' , context = context)
 
-def updateInteractivePlatform(request, pk):
-    instance = InteractivePlatform.objects.get( pk=pk )
-    if request.method == 'POST':
-        interactivePlatformForm = InteractivePlatformForm(request.POST, request.FILES, instance=instance)
-        if interactivePlatformForm.is_valid():
-            interactivePlatformForm.save()
-            return redirect('showInteractivePlatform')
-    else:
-        interactivePlatformForm = InteractivePlatformForm(instance=instance)
-
-    form = GeneralForm(instance=General.objects.first())
-
-    interactivePlatforms = InteractivePlatform.objects.all()
-
-    context = {
-        'form': form,
-        'interactivePlatformForm': interactivePlatformForm,
-        'interactivePlatforms': interactivePlatforms,
-        'title': 'Update Interactive Platform',
-        'breadcrumb': 'Interactive Platform Settings'
-    }
-
-    return render(request, 'adminControl/interactivePlatform/updatePlatform.html', context=context)
 
 def updateInteractivePlatformList(request, pk):
     instance = InteractivePlatformList.objects.get( pk=pk )
+    platformInstance = InteractivePlatform.objects.get( pk=1 )
     if request.method == 'POST':
         interactivePlatformListForm = InteractivePlatformListForm(request.POST, request.FILES, instance=instance)
-        if interactivePlatformListForm.is_valid():
+        interactivePlatformForm = InteractivePlatformForm(request.POST, request.FILES, instance=platformInstance)
+        if interactivePlatformListForm.is_valid() and interactivePlatformForm.is_valid():
             interactivePlatformListForm.save()
+            interactivePlatformForm.save()
+            messages.success(request, 'Interactive Platform Update Successful')
+            return redirect('showInteractivePlatform')
+        else:
+            messages.error(request, 'Interactive Platform Update Failed , Please Check the form again')
             return redirect('showInteractivePlatform')
     else:
         interactivePlatformListForm = InteractivePlatformListForm(instance=instance)
+        interactivePlatformForm = InteractivePlatformForm(instance=platformInstance)
 
     form = GeneralForm(instance=General.objects.first())
 
@@ -184,17 +185,13 @@ def updateInteractivePlatformList(request, pk):
     context = {
         'form': form,
         'interactivePlatformListForm': interactivePlatformListForm,
+        'interactivePlatformForm': interactivePlatformForm,
         'interactivePlatforms': interactivePlatforms,
         'title': 'Update Interactive Platform',
-        'breadcrumb': 'Interactive Platform Settings'
+        'breadcrumb': 'Interactive Platform'
     }
 
     return render(request, 'adminControl/interactivePlatform/update.html', context=context)
-
-def deleteInteractivePlatformList(request , pk):
-    instance = InteractivePlatform.objects.get( pk=pk)
-    instance.delete()
-    return redirect('showInteractivePlatform')
 
 
 def updateWhySubscriptionShare(request , pk):
@@ -203,7 +200,12 @@ def updateWhySubscriptionShare(request , pk):
         whySubscriptionShareForm = WhySubscriptionShareForm(request.POST, request.FILES, instance=instance)
         if whySubscriptionShareForm.is_valid():
             whySubscriptionShareForm.save()
-            return redirect('updateWhySubscriptionShare', pk=pk)
+            messages.success(request, 'Subscription Share Title Update Successful')
+            return redirect('showWhySubscriptionShareList')
+        else:
+            messages.error(request, 'Subscription Share Update Failed , Please Check the form again')
+            return redirect('showWhySubscriptionShareList')
+
     else:
         whySubscriptionShareForm = WhySubscriptionShareForm(instance=instance)
 
@@ -213,7 +215,7 @@ def updateWhySubscriptionShare(request , pk):
         'whySubscriptionShareForm': whySubscriptionShareForm,
         'alert' : "Update Successful",
         'title': 'Update Why Subscription Share',
-        'breadcrumb': 'Subscription Share Settings'
+        'breadcrumb': 'Subscription Share'
     }
 
     return render(request, 'adminControl/subscriptionShare/whySubscriptionShare/update.html', context=context)
@@ -221,13 +223,15 @@ def updateWhySubscriptionShare(request , pk):
 
 def showWhySubscriptionShareList(request):
     form = GeneralForm(instance=General.objects.first())
+    whySubscriptionShare = WhySubscriptionShare.objects.first()
     whySubscriptionShareList = WhySubscriptionShareList.objects.all()
 
     context = {
         'form': form,
+        'whySubscriptionShare': whySubscriptionShare,
         'whySubscriptionShareLists': whySubscriptionShareList,
         'title': 'Subscription Share List',
-        'breadcrumb': 'Subscription Share Settings'
+        'breadcrumb': 'Subscription Share'
     }
 
     return render(request ,'adminControl\subscriptionShare\whySubscriptionShareList\showSubscriptionShareList.html', context=context)
@@ -238,6 +242,10 @@ def updateWhySubscriptionShareList(request , pk):
         whySubscriptionShareListForm = WhySubscriptionShareListForm(request.POST, request.FILES, instance=instance)
         if whySubscriptionShareListForm.is_valid():
             whySubscriptionShareListForm.save()
+            messages.success(request, 'Subscription Share List Update Successful')
+            return redirect('showWhySubscriptionShareList')
+        else:
+            messages.error(request, 'Subscription Share List Update Failed , Please Check the form again')
             return redirect('showWhySubscriptionShareList')
     else:
         whySubscriptionShareListForm = WhySubscriptionShareListForm(instance=instance)    
@@ -251,16 +259,3 @@ def updateWhySubscriptionShareList(request , pk):
     }
 
     return render(request, 'adminControl/subscriptionShare/whySubscriptionShareList/update.html', context=context)
-
-def showWhySubscriptionPackages(request):
-    form = GeneralForm(instance=General.objects.first())
-    subscriptionPackages = SubscriptionPackage.objects.all()
-
-    context = {
-        'form': form,
-        'subscriptionPackages': subscriptionPackages,
-        'title': 'Subscription Packages',
-        'breadcrumb': 'Subscription Package Settings'
-    }
-
-    return render(request ,'adminControl\subscriptionPackage\showSubscriptionPackages.html', context=context)

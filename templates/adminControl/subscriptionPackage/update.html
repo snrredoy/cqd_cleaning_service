@@ -1,0 +1,60 @@
+{% extends 'adminControl/adminBase.html' %}
+{% load static %}
+
+{% block general %}
+<div class="card mb-4">
+    <h5 class="card-header">Subscription Package</h5>
+
+    <div class="card-body">
+        <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="d-flex">
+
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img src="http://127.0.0.1:8000/media/{{ subscriptionPackageForm.packageIcon.value }}"
+                            alt="upload icon to show" class="d-block rounded" height="100" width="100"
+                            id="uploadedAvatar" />
+                        <div class="button-wrapper">
+                            <label for="packageIcon" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Upload Icon</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="packageIcon" name="packageIcon" class="account-file-input" hidden
+                                    accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Reset</span>
+                            </button>
+
+                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="mb-4" />
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="packageName" class="form-label">Package Name</label>
+                    <input class="form-control" type="text" id="packageName" name="packageName"
+                        placeholder="Package Name here" autofocus
+                        value="{{ subscriptionPackageForm.packageName.value }}" />
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="packagePrice" class="form-label">package price</label>
+                    <input type="text" class="form-control" id="packagePrice" name="packagePrice"
+                        placeholder="Package Price" value="{{ subscriptionPackageForm.packagePrice.value }}" />
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="minimumClient" class="form-label">minimum client</label>
+                    <input type="text" class="form-control" id="minimumClient" name="minimumClient"
+                        placeholder="Minimum Client" value="{{ subscriptionPackageForm.minimumClient.value }}" />
+                </div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary me-2">Update Package</button>
+                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endblock %}

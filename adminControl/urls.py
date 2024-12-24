@@ -19,9 +19,7 @@ urlpatterns = [
     path("deleteCommercialServices/<int:pk>/", views.deleteCommercialServices , name="deleteCommercialServices"),
 
     path("showInteractivePlatform/", views.showInteractivePlatform , name="showInteractivePlatform"),
-    path("updateInteractivePlatform/<int:pk>/", views.updateInteractivePlatform , name="updateInteractivePlatform"),
     path("updateInteractivePlatformList/<int:pk>/", views.updateInteractivePlatformList , name="updateInteractivePlatformList"),
-    path("deleteInteractivePlatformList/<int:pk>/", views.deleteInteractivePlatformList , name="deleteInteractivePlatformList"),
 
 
     path("updateWhySubscriptionShare/<int:pk>/", views.updateWhySubscriptionShare , name="updateWhySubscriptionShare"),

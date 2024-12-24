@@ -1,0 +1,43 @@
+{% load static %}
+
+<div
+    class=" w-[97%] mx-[27px] inline-flex flex-col justify-center items-center gap-12 px-[30px] py-[120px] rounded-2xl">
+    <span class="text-[#0459E5] font-medium text-[18px] leading-[27px] font-poppins"></span>
+    <span
+        class="mb-10 text-center self-stretch text-[#0F2A5C] font-semibold text-[48px] leading-[62.4px] font-poppins font-feature-no-ligatures">
+        Choose the Package that <br> Fits Your Needs
+    </span>
+
+    <div class="flex flex-wrap justify-center gap-8">
+        {% for subscriptionPackage in subscriptionPackages %}
+        <div
+            class="relative w-[360px] bg-[#f8fafc] rounded-[12px] hover:bg-[#0459E5] hover:shadow-[8px_8px_3px_0px_rgba(0,89,255,0.16)] group transition-all">
+            <div
+                class="flex justify-center items-center absolute left-[50%] top-[-45px] transform -translate-x-[50%] w-[100px] h-[100px] p-[10px] rounded-full border-2 border-[#0459E5] bg-white shadow-[0px_12px_36px_0px_rgba(4,89,229,0.16)]">
+                <img src="{{ subscriptionPackage.packageIcon.url }}" alt="Icon" class="w-full h-full object-cover">
+            </div>
+            <div class="flex flex-col justify-center items-center pt-[120px] px-[24px] pb-[24px] transition-all">
+                <span
+                    class="text-[24px] font-normal leading-[150%] text-center text-[#5B6477] mb-[32px] group-hover:text-white ">
+                    {{ subscriptionPackage.packageName }}
+                </span>
+                <span
+                    class="text-[48px] font-semibold leading-[130%] text-center text-[#0459E5] group-hover:text-white">
+                    {{ subscriptionPackage.packagePrice }}
+                </span>
+                <span
+                    class="text-[24px] font-medium leading-[150%] text-center text-[#5B6477] mb-[32px] group-hover:text-white">
+                    EX VAT
+                </span>
+                <div
+                    class="flex p-[16px_32px] justify-center items-center gap-[8px] rounded-[12px] border border-[#0B75FF] whitespace-nowrap w-full group-hover:bg-[#02B71F]">
+                    <span
+                        class="text-[20px] font-medium leading-[150%] text-center text-[#0B75FF] w-full group-hover:text-white">
+                        {{ subscriptionPackage.minimumClient }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

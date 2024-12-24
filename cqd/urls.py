@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path("adminControl/",include("adminControl.urls")),
+    path("adminControl/subscriptionPackage/",include("adminSubscriptionPackage.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

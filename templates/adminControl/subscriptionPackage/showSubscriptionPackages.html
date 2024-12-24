@@ -1,0 +1,95 @@
+{% extends 'adminControl/adminBase.html' %}
+{% load static %}
+
+{% block general %}
+
+<div class="card mb-4">
+
+
+    <div class="card-body">
+        <h1>Show Commercial Services</h1>
+        <div class="float-end mb-3">
+            <a href="{% url 'addSubscriptionPackage' %}">
+                <button class="btn btn-info">Add Subscription Package</button>
+            </a>
+        </div>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="text-center ">Package No</th>
+                    <th class="text-center">Package Icon</th>
+                    <th class="">Package Name</th>
+                    <th class="text-start">Package Price</th>
+                    <th class="">Package Minimum Clients</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subscriptionPackage in subscriptionPackages %}
+                <tr>
+                    <td class="text-center">{{ forloop.counter }}</td>
+                    <td class="d-flex justify-content-center align-items-center">
+                        <div class="shadow bg-body-tertiary rounded p-3" style="width: 80px;">
+                            <img src="{{ subscriptionPackage.packageIcon.url }}" alt="Image of Commercial Service"
+                                style="width: 100%;">
+                        </div>
+                    </td>
+                    <td class="">{{ subscriptionPackage.packageName }}</td>
+                    <td class="text-start">{{ subscriptionPackage.packagePrice }}</td>
+                    <td class="">{{ subscriptionPackage.minimumClient }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'updateSubscriptionPackage' subscriptionPackage.id %}">
+                            <button class="btn btn-primary">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </a>
+                        <a href="{% url 'deleteSubscriptionPackage' subscriptionPackage.id %}">
+                            <button class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% else %}bg-success text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Notification</div>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "pageLength": 4,
+            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "All"]]
+            // "order": [[1, "asc"]]  // Set default ordering on the second column
+        });
+    });
+</script>
+
+{% endblock %}

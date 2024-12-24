@@ -1,4 +1,4 @@
-from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList , SubscriptionPackage
+from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList 
 from django import forms
 
 class GeneralForm(forms.ModelForm):
@@ -42,8 +42,3 @@ class WhySubscriptionShareListForm(forms.ModelForm):
         model = WhySubscriptionShareList
         fields = '__all__'
 
-
-class SubscriptionPackageForm(forms.ModelForm):
-    class Meta:
-        model = SubscriptionPackage
-        fields = '__all__'

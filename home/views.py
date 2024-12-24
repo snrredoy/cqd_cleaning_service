@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from adminControl.models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList
+from adminSubscriptionPackage.models import SubscriptionPackage
 
 # Create your views here.
 def home(request):
@@ -10,6 +11,7 @@ def home(request):
     interactivePlatformList = InteractivePlatformList.objects.all()
     whySubscriptionShare = WhySubscriptionShare.objects.first()
     whySubscriptionShareList = WhySubscriptionShareList.objects.all()
+    subscriptionPackages = SubscriptionPackage.objects.all()
 
 
     context = {
@@ -20,5 +22,6 @@ def home(request):
         'interactivePlatformLists': interactivePlatformList,
         'whySubscriptionShares': whySubscriptionShare,
         'whySubscriptionShareLists': whySubscriptionShareList,
+        'subscriptionPackages': subscriptionPackages,
     }
     return render(request, 'base.html' , context=context )
