@@ -2,89 +2,134 @@
 {% block general %}
 <div class="card mb-4">
     <h5 class="card-header">Update Interactive Platform</h5>
-    <!-- Account -->
 
     <div class="card-body">
         <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+            <div class="d-flex">
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img src="http://127.0.0.1:8000/media/{{ interactivePlatformForm.image.value }}"
+                            alt="user-avatar" class="d-block rounded" width="90px" id="uploadedImage" />
+                        <div class="button-wrapper">
+                            <label for="image" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Upload Image</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="image" name="image" class="account-file-input" hidden
+                                    accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block" id="resetImage">Reset</span>
+                            </button>
 
-            <h2>Interactive Platform Feature List</h2>
-            <div class="card-body mb-4">
-                <div class="d-flex align-items-start align-items-sm-center gap-4">
-                    <img src="http://127.0.0.1:8000/media/{{ interactivePlatformListForm.icon.value }}"
-                        alt="user-avatar" class="d-block rounded object-fit-none " height="100" width="100"
-                        id="uploadedAvatar" />
-                    <div class="button-wrapper">
-                        <label for="icon" class="btn btn-primary me-2 mb-4" tabindex="0">
-                            <span class="d-none d-sm-block">Upload Icon</span>
-                            <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input type="file" id="icon" name="icon" class="account-file-input" hidden
-                                accept="image/png, image/jpeg" />
-                        </label>
-                        <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                            <i class="bx bx-reset d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Reset</span>
-                        </button>
-
-                        <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
                     </div>
                 </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img src="http://127.0.0.1:8000/media/{{ interactivePlatformListForm.icon.value }}"
+                            alt="user-avatar" class="d-block rounded" width="50px" id="uploadedIcon" />
+                        <div class="button-wrapper">
+                            <label for="icon" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Upload Icon</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="icon" name="icon" class="account-file-input" hidden
+                                    accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block" id="resetIcon">Reset</span>
+                            </button>
 
-                <div class="d-flex align-items-start align-items-sm-center gap-4">
-                    <img src="http://127.0.0.1:8000/media/{{ interactivePlatformForm.image.value }}" alt="user-avatar"
-                        class="d-block rounded " height="100" width="100" id="uploadedAvatar" />
-                    <div class="button-wrapper">
-                        <label for="image" class="btn btn-primary me-2 mb-4" tabindex="0">
-                            <span class="d-none d-sm-block">Upload Icon</span>
-                            <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input type="file" id="image" name="image" class="account-file-input" hidden
-                                accept="image/png, image/jpeg" />
-                        </label>
-                        <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                            <i class="bx bx-reset d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Reset</span>
-                        </button>
-
-                        <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="mb-3 col-md-6">
-                        <label for="title" class="form-label">Platform Title</label>
-                        <input class="form-control" type="text" id="title" name="title"
-                            placeholder="Platform Title here" autofocus
-                            value="{{ interactivePlatformListForm.title.value }}" />
-
-                    </div>
-                    <div class="mb-3 col-md-6">
-                        <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="description" name="description"
-                            placeholder="Description" value="{{ interactivePlatformListForm.description.value }}" />
-
-                    </div>
-                    <div class="mb-3 col-md-6">
-                        <label for="interactivePlatform" class="form-label">Select
-                            Platform</label>
-                        <select class="form-control" id="interactivePlatform" name="interactivePlatform">
-                            {% for platform in interactivePlatforms %}
-                            <option value="{{ platform.id }}" {% if
-                                interactivePlatformListForm.instance.interactivePlatform.id==platform.id %} selected {%
-                                endif %}>
-                                {{ platform }}
-                            </option>
-                            {% endfor %}
-                        </select>
+                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <hr class="mb-4" />
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="title" class="form-label">Platform Title</label>
+                    <input class="form-control" type="text" id="title" name="title" placeholder="Platform Title here"
+                        autofocus value="{{ interactivePlatformListForm.title.value }}" />
 
-            <div class="mt-2">
-                <button type="submit" class="btn btn-primary me-2">Update</button>
-                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="description" name="description"
+                        placeholder="Description" value="{{ interactivePlatformListForm.description.value }}" />
+
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="interactivePlatform" class="form-label">Select
+                        Platform</label>
+                    <select class="form-control" id="interactivePlatform" name="interactivePlatform">
+                        {% for platform in interactivePlatforms %}
+                        <option value="{{ platform.id }}" {% if
+                            interactivePlatformListForm.instance.interactivePlatform.id==platform.id %} selected {%
+                            endif %}>
+                            {{ platform }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary me-2">Update</button>
+                    <button type="reset" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
+                </div>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+
+    const iconInput = document.getElementById('icon');
+    const uploadedIcon = document.getElementById('uploadedIcon');
+    const resetIconBtn = document.getElementById('resetIcon');
+    const originalIconSrc = uploadedIcon.src;
+
+    iconInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedIcon.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    resetIconBtn.addEventListener('click', function () {
+        iconInput.value = "";
+        uploadedIcon.src = originalIconSrc;
+    });
+
+    const imageInput = document.getElementById('image');
+    const uploadedImage = document.getElementById('uploadedImage');
+    const resetImageBtn = document.getElementById('resetImage');
+    const originalImageSrc = uploadedImage.src;
+
+    imageInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    resetImageBtn.addEventListener('click', function () {
+        imageInput.value = "";
+        uploadedImage.src = originalImageSrc;
+    });
+    document.getElementById("cancelBtn").onclick = function () {
+        window.location.href = "{% url 'showInteractivePlatform' %}";
+    };
+</script>
 
 {% endblock %}

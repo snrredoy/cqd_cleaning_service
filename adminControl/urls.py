@@ -23,7 +23,6 @@ urlpatterns = [
 
 
     path("updateWhySubscriptionShare/<int:pk>/", views.updateWhySubscriptionShare , name="updateWhySubscriptionShare"),
-
     path("showWhySubscriptionShareList/", views.showWhySubscriptionShareList , name="showWhySubscriptionShareList"),
     path("updateWhySubscriptionShareList/<int:pk>/", views.updateWhySubscriptionShareList , name="updateWhySubscriptionShareList"),
 

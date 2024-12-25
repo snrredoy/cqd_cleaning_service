@@ -1,18 +1,17 @@
 {% load static %}
 
 <div
-    class="inline-flex flex-col justify-center items-center gap-12 px-[262px] py-[120px] rounded-2xl bg-gradient-to-b from-[rgba(133,210,255,0.60)] to-[rgba(214,238,255,0.60)] w-[97%] mx-[28px]">
-    <span
-        class="text-[#0459E5] text-center font-medium text-[18px] leading-[27px] font-poppins font-feature-no-ligatures">Introducing
+    class="inline-flex flex-col justify-center items-center px-[262px] py-[120px] rounded-2xl bg-gradient-to-b from-[rgba(133,210,255,0.60)] to-[rgba(214,238,255,0.60)] w-[97%] mx-[28px]">
+    <span class="text-[#0459E5] font-medium mb-4 text-center font-poppins font-feature-no-ligatures">Introducing
         a New Way
     </span>
     <span
-        class="text-[#0F2A5C] text-center font-semibold text-[48px] leading-[62.4px] font-poppins self-stretch font-feature-no-ligatures">To
-        Access Commercial Cleaning Services</span>
+        class="text-5xl font-semibold text-[#0F2A5C] text-center mb-8 font-poppins self-stretch font-feature-no-ligatures">To
+        Access Commercial <br> Cleaning Services</span>
 
     <div class="flex flex-wrap gap-8 justify-between self-stretch">
         {% for commercialService in commercialServices %}
-        <div class="rounded-[12px] bg-[#FFF] flex flex-col items-start p-6 gap-6 flex-[1_0_0] max-w-[calc(33%_-_8px)]">
+        <div class="rounded-[12px] bg-[#FFF] flex flex-col items-start p-6 gap-2 flex-[1_0_0] max-w-[calc(33%_-_8px)]">
             <div class="flex justify-between items-center w-full relative">
                 <div class="rounded-[59.733px] border border-[#0459E5] flex w-16 h-16 p-4 justify-center items-center">
                     <img src="{{ commercialService.icon.url }}" alt="icon">
@@ -23,20 +22,19 @@
                 </div>
             </div>
             <div class="bg-[#C1C4CC] w-[95%] h-px"></div>
-            <span
-                class="text-[#0F2A5C] font-semibold text-[20px] leading-[30px] font-poppins self-stretch font-feature-no-ligatures">
+            <span class="text-[#0F2A5C] font-semibold text-xl font-poppins self-stretch font-feature-no-ligatures">
                 {{ commercialService.serviceTitle }}</span>
-            <span
-                class="text-[#5B6477] font-normal text-[16px] leading-[24px] font-poppins self-stretch font-feature-no-ligatures">
+            <span class="text-[#5B6477] font-normal text-base font-poppins self-stretch font-feature-no-ligatures">
                 {{ commercialService.description }}</span>
         </div>
         {% endfor %}
     </div>
 
-    <div class="flex mt-8">
-        <button class="bg-[#02B71F] py-2 rounded-full text-white flex justify-between px-4">
+    <div class="flex mt-8 self-center">
+        <button class="bg-[#02B71F] py-4 rounded-full text-white flex justify-between px-8 font-medium text-lg">
             {{ generalData.buttonText }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none" class="ml-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
+                class="ml-1 mt-[2px]">
                 <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
                 <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
                 <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />

@@ -10,11 +10,10 @@
         <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="d-flex">
-
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <img src="http://127.0.0.1:8000/media/{{ form.favicon.value }}" alt="user-avatar"
-                            class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                            class="d-block rounded" height="100" width="100" id="uploadedFavicon" />
                         <div class="button-wrapper">
                             <label for="favicon" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload Favicon</span>
@@ -24,7 +23,7 @@
                             </label>
                             <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                                 <i class="bx bx-reset d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block">Reset</span>
+                                <span class="d-none d-sm-block" id="resetFavicon">Reset</span>
                             </button>
 
                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
@@ -34,7 +33,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <img src="http://127.0.0.1:8000/media/{{ form.navLogo.value }}" alt="user-avatar"
-                            class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                            class="d-block rounded" height="100" width="100" id="uploadedNavLogo" />
                         <div class="button-wrapper">
                             <label for="navLogo" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload Nav logo</span>
@@ -44,7 +43,7 @@
                             </label>
                             <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                                 <i class="bx bx-reset d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block">Reset</span>
+                                <span class="d-none d-sm-block" id="resetNavLogo">Reset</span>
                             </button>
 
                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
@@ -54,7 +53,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <img src="http://127.0.0.1:8000/media/{{ form.banner.value }}" alt="user-avatar"
-                            class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                            class="d-block rounded" height="100" width="100" id="uploadedBanner" />
                         <div class="button-wrapper">
                             <label for="banner" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload Banner</span>
@@ -64,7 +63,7 @@
                             </label>
                             <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                                 <i class="bx bx-reset d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block">Reset</span>
+                                <span class="d-none d-sm-block" id="resetBanner">Reset</span>
                             </button>
 
                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
@@ -115,27 +114,77 @@
                 </div>
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary me-2">Update</button>
-                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    <button type="reset" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
                 </div>
             </div>
         </form>
     </div>
+</div>
 
-    {% if messages %}
-    {% for message in messages %}
-    <div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% else %}bg-success text-white{% endif %}"
-        role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000"
-        style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
-        <div class="toast-header">
-            <i class="bx bx-bell me-2"></i>
-            <div class="me-auto fw-semibold">Notification</div>
-            <small>Just now</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            {{ message }}
-        </div>
+{% if messages %}
+{% for message in messages %}
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% else %}bg-success text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Notification</div>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    {% endfor %}
-    {% endif %}
-    {% endblock %}
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<script>
+    // Preview function for Favicon
+    document.getElementById('favicon').onchange = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById('uploadedFavicon').src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    // Preview function for Nav Logo
+    document.getElementById('navLogo').onchange = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById('uploadedNavLogo').src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    // Preview function for Banner
+    document.getElementById('banner').onchange = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById('uploadedBanner').src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    // Reset function for Favicon
+    document.getElementById('resetFavicon').onclick = function () {
+        document.getElementById('uploadedFavicon').src = 'http://127.0.0.1:8000/media/{{ form.favicon.value }}';
+        document.getElementById('favicon').value = '';  // Reset the file input
+    };
+
+    // Reset function for Nav Logo
+    document.getElementById('resetNavLogo').onclick = function () {
+        document.getElementById('uploadedNavLogo').src = 'http://127.0.0.1:8000/media/{{ form.navLogo.value }}';
+        document.getElementById('navLogo').value = '';  // Reset the file input
+    };
+
+    // Reset function for Banner
+    document.getElementById('resetBanner').onclick = function () {
+        document.getElementById('uploadedBanner').src = 'http://127.0.0.1:8000/media/{{ form.banner.value }}';
+        document.getElementById('banner').value = '';  // Reset the file input
+    };
+</script>
+
+{% endblock %}

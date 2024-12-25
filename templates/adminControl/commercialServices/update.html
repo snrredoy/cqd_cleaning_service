@@ -10,11 +10,10 @@
         <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="d-flex">
-
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <img src="http://127.0.0.1:8000/media/{{ commercialServicesForm.icon.value }}" alt="user-avatar"
-                            class="d-block rounded object-fit-none" height="100" width="100" id="uploadedAvatar" />
+                            class="d-block rounded" width="60px" id="uploadedIcon" />
                         <div class="button-wrapper">
                             <label for="icon" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload Icon</span>
@@ -24,9 +23,8 @@
                             </label>
                             <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                                 <i class="bx bx-reset d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block">Reset</span>
+                                <span class="d-none d-sm-block" id="resetIcon">Reset</span>
                             </button>
-
                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
                         </div>
                     </div>
@@ -34,7 +32,8 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <img src="http://127.0.0.1:8000/media/{{ commercialServicesForm.wattermarkIcon.value }}"
-                            alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                            alt="user-avatar" class="d-block rounded border" width="100px"
+                            id="uploadedWattermarkIcon" />
                         <div class="button-wrapper">
                             <label for="wattermarkIcon" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload Icon</span>
@@ -44,9 +43,8 @@
                             </label>
                             <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                                 <i class="bx bx-reset d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block">Reset</span>
+                                <span class="d-none d-sm-block" id="resetWattermarkIcon">Reset</span>
                             </button>
-
                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
                         </div>
                     </div>
@@ -71,9 +69,60 @@
                 </div>
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary me-2">Update</button>
-                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    <button type="reset" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
                 </div>
             </div>
         </form>
     </div>
-    {% endblock %}
+</div>
+
+<script>
+
+    const iconInput = document.getElementById('icon');
+    const uploadedIcon = document.getElementById('uploadedIcon');
+    const resetIconBtn = document.getElementById('resetIcon');
+    const originalIconSrc = uploadedIcon.src;
+
+    iconInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedIcon.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    resetIconBtn.addEventListener('click', function () {
+        iconInput.value = '';
+        uploadedIcon.src = originalIconSrc;
+    });
+
+
+    const watermarkInput = document.getElementById('wattermarkIcon');
+    const uploadedWatermarkIcon = document.getElementById('uploadedWattermarkIcon');
+    const resetWatermarkBtn = document.getElementById('resetWattermarkIcon');
+    const originalWatermarkSrc = uploadedWatermarkIcon.src;
+
+    watermarkInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedWatermarkIcon.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    resetWatermarkBtn.addEventListener('click', function () {
+        watermarkInput.value = '';
+        uploadedWatermarkIcon.src = originalWatermarkSrc;
+    });
+
+    document.getElementById("cancelBtn").onclick = function () {
+        window.location.href = "{% url 'showCommercialServices' %}";
+    };
+</script>
+{% endblock %}

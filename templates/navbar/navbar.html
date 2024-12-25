@@ -1,16 +1,16 @@
 {% load static %}
 
-<nav class="bg-[#0F2A5C] mt-4 p-4 rounded-full flex justify-between w-[98%] mx-4">
-  <div class=" flex items-center">
+<nav class="bg-[#0F2A5C] mt-6 p-4 rounded-full flex justify-between w-[98%] mx-4">
+  <div class=" flex items-center w-[20%]">
     <a href="#" class="">
-      <img src="http://127.0.0.1:8000/{{ generalData.navLogo.url }}" class="h-8" alt="CQD Logo" />
+      <img src="http://127.0.0.1:8000/{{ generalData.navLogo.url }}" class="w-[75%]" alt="CQD Logo" />
     </a>
   </div>
   <!-- navbar options -->
-  <div id="navbarOptions" class="text-white flex justify-evenly items-center w-1/2">
-    <a href="">Home</a>
-    <a href="">About Us</a>
-    <div class="dropdown">
+  <div id="navbarOptions" class="text-white text-base font-medium flex justify-evenly items-center w-1/2">
+    <a href="" class="hover:text-[#02B71F] hover:decoration-solid hover:underline">Home</a>
+    <a href="" class="hover:text-[#02B71F] hover:decoration-solid hover:underline">About Us</a>
+    <div class="dropdown hover:text-[#02B71F] hover:decoration-solid hover:underline">
       <div>
         <button type="button" class="flex justify-center items-center drdwbtn" id="menu-button">Service
 
@@ -23,23 +23,30 @@
       </div>
 
       <div class="drdwContent z-40">
-        <a href="#" class="block px-4 py-2 text-sm text-gray-700" id="menu-item-0">Account settings</a>
-        <a href="#" class="block px-4 py-2 text-sm text-gray-700" id="menu-item-1">Support</a>
-        <a href="#" class="block px-4 py-2 text-sm text-gray-700" id="menu-item-2">License</a>
+        <a href="#"
+          class="block px-4 py-2 text-sm text-gray-700 hover:text-[#02B71F] hover:decoration-solid hover:underline"
+          id="menu-item-0">Account settings</a>
+        <a href="#"
+          class="block px-4 py-2 text-sm text-gray-700 hover:text-[#02B71F] hover:decoration-solid hover:underline"
+          id="menu-item-1">Support</a>
+        <a href="#"
+          class="block px-4 py-2 text-sm text-gray-700 hover:text-[#02B71F] hover:decoration-solid hover:underline"
+          id="menu-item-2">License</a>
       </div>
     </div>
-    <a href="">Pricing</a>
-    <a href="">Career</a>
-    <a href="">Blog</a>
-    <a href="">Contact</a>
+    <a href="" class="hover:text-[#02B71F] hover:decoration-solid hover:underline">Pricing</a>
+    <a href="" class="hover:text-[#02B71F] hover:decoration-solid hover:underline">Career</a>
+    <a href="" class="hover:text-[#02B71F] hover:decoration-solid hover:underline">Blog</a>
+    <a href="" class="hover:text-[#02B71F] hover:decoration-solid hover:underline">Contact</a>
   </div>
 
   <!-- navbar end -->
 
   <div class="flex">
-    <button class="bg-[#02B71F] py-2 rounded-full text-white flex justify-between px-4">
+    <button class="bg-[#02B71F] py-4 rounded-full text-white flex justify-between px-8 font-medium text-lg">
       {{ generalData.buttonText }}
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none" class="ml-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
+        class="ml-1 mt-[2px]">
         <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
         <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
         <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />
@@ -47,6 +54,7 @@
           stroke-linejoin="round" />
       </svg>
     </button>
+  </div>
 </nav>
 
 

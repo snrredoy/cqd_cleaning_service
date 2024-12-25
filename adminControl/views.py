@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render , get_object_or_404
 from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList 
-from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , InteractivePlatformForm , InteractivePlatformListForm , WhySubscriptionShareForm , WhySubscriptionShareListForm 
+from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , InteractivePlatformForm , InteractivePlatformListForm , WhySubscriptionShareForm , WhySubscriptionShareListForm  
 
 
 # Create your views here.
@@ -26,7 +26,7 @@ def updateGeneralSetting(request , pk):
     else:
         form = GeneralForm(instance=instance)
 
-    return render(request, 'adminControl/generalSetting/update.html' , {'form': form , 'title': 'Update General Setting' , 'breadcrumb': 'General Setting'})
+    return render(request, 'adminControl/generalSetting/update.html' , {'form': form , 'title': 'Update General Info' , 'breadcrumb': 'General Info'})
 
 
 
@@ -46,19 +46,19 @@ def addTrustedPartner(request):
             return redirect('showTrustedPartners')
         else:
             messages.error(request, 'Partner Adding Failed , Please Check the form again')
-            return redirect('showTrustedPartners')
+            return redirect('addTrustedPartner')
     else:
         trustedForm = TrustedPartnerForm()
 
     form = GeneralForm(instance=General.objects.first())
 
-    return render(request, 'adminControl/trustedPartner/create.html' , {'form': form , 'trustedForm': trustedForm , 'title': 'Add Partner' , 'breadcrumb': 'Trusted Partner Settings'})
+    return render(request, 'adminControl/trustedPartner/create.html' , {'form': form , 'trustedForm': trustedForm , 'title': 'Add Partner' , 'breadcrumb': 'Trusted Partner'})
 
 def showTrustedPartners(request):
     form = GeneralForm(instance=General.objects.first())
     trustedPartners  = TrustedPartner.objects.all()
 
-    return render(request, 'adminControl/trustedPartner/showPartners.html' , {'form': form , 'trustedPartners': trustedPartners , 'title': 'Partner List' , 'breadcrumb': 'Trusted Partner Setting'})
+    return render(request, 'adminControl/trustedPartner/showPartners.html' , {'form': form , 'trustedPartners': trustedPartners , 'title': 'Partner List' , 'breadcrumb': 'Trusted Partner'})
 
 def updateTrustedPartner(request , pk):
     instance = get_object_or_404(TrustedPartner, pk=pk)
@@ -70,13 +70,13 @@ def updateTrustedPartner(request , pk):
             return redirect('showTrustedPartners')
         else:
             messages.error(request, 'Partner Update Failed , Please Check the form again')
-            return redirect('showTrustedPartners')
+            return redirect('updateTrustedPartner', pk=pk)
     else:
         trustedForm = TrustedPartnerForm(instance=instance)
 
     form = GeneralForm(instance=General.objects.first())
 
-    return render(request, 'adminControl/trustedPartner/update.html' , {'form': form , 'trustedForm': trustedForm , 'title': 'Update Partner' , 'breadcrumb': 'Trusted Partner Settings'})
+    return render(request, 'adminControl/trustedPartner/update.html' , {'form': form , 'trustedForm': trustedForm , 'title': 'Update Partner' , 'breadcrumb': 'Trusted Partner'})
 
 def deleteTrustedPartner(request , pk):
     instance = get_object_or_404(TrustedPartner, pk=pk)
@@ -96,12 +96,13 @@ def addCommercialServices(request):
             return redirect('showCommercialServices')
         else:
             messages.error(request, 'Service Adding Failed , Please Check the form again')
-            return redirect('showCommercialServices')
+            return redirect('addCommercialServices')
     else:
         commercialServicesForm = CommercialServicesForm()
 
     form = GeneralForm(instance=General.objects.first())
-    return render(request, 'adminControl/commercialServices/create.html' , {'form': form , 'commercialServicesForm': commercialServicesForm , 'title': 'Add Commercial Service' , 'breadcrumb': 'Commercial Service Settings'})
+
+    return render(request, 'adminControl/commercialServices/create.html' , {'form': form , 'commercialServicesForm': commercialServicesForm , 'title': 'Add Commercial Service' , 'breadcrumb': 'Commercial Service'})
 
 
 def showCommercialServices(request):
@@ -122,7 +123,7 @@ def updateCommercialServices(request , pk):
             return redirect('showCommercialServices')
         else:
             messages.error(request, 'Service Update Failed , Please Check the form again')
-            return redirect('showCommercialServices')
+            return redirect('updateCommercialServices', pk=pk)
     else:
         commercialServicesForm = CommercialServicesForm(instance=instance)
 
@@ -173,7 +174,7 @@ def updateInteractivePlatformList(request, pk):
             return redirect('showInteractivePlatform')
         else:
             messages.error(request, 'Interactive Platform Update Failed , Please Check the form again')
-            return redirect('showInteractivePlatform')
+            return redirect('updateInteractivePlatformList', pk=pk)
     else:
         interactivePlatformListForm = InteractivePlatformListForm(instance=instance)
         interactivePlatformForm = InteractivePlatformForm(instance=platformInstance)
@@ -204,7 +205,7 @@ def updateWhySubscriptionShare(request , pk):
             return redirect('showWhySubscriptionShareList')
         else:
             messages.error(request, 'Subscription Share Update Failed , Please Check the form again')
-            return redirect('showWhySubscriptionShareList')
+            return redirect('updateWhySubscriptionShare' , pk=pk)
 
     else:
         whySubscriptionShareForm = WhySubscriptionShareForm(instance=instance)
@@ -246,7 +247,7 @@ def updateWhySubscriptionShareList(request , pk):
             return redirect('showWhySubscriptionShareList')
         else:
             messages.error(request, 'Subscription Share List Update Failed , Please Check the form again')
-            return redirect('showWhySubscriptionShareList')
+            return redirect('updateWhySubscriptionShareList' , pk=pk)
     else:
         whySubscriptionShareListForm = WhySubscriptionShareListForm(instance=instance)    
 
@@ -255,7 +256,7 @@ def updateWhySubscriptionShareList(request , pk):
         'form': form,
         'whySubscriptionShareListForm': whySubscriptionShareListForm,
         'title': 'Update Subscription Share List',
-        'breadcrumb': 'Subscription Share Settings'
+        'breadcrumb': 'Subscription Share'
     }
 
     return render(request, 'adminControl/subscriptionShare/whySubscriptionShareList/update.html', context=context)

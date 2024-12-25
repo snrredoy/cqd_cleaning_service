@@ -4,14 +4,14 @@
     class=" w-[97%] mx-[27px] inline-flex flex-col justify-center items-center gap-12 px-[30px] py-[120px] rounded-2xl">
     <span class="text-[#0459E5] font-medium text-[18px] leading-[27px] font-poppins"></span>
     <span
-        class="mb-10 text-center self-stretch text-[#0F2A5C] font-semibold text-[48px] leading-[62.4px] font-poppins font-feature-no-ligatures">
+        class="text-center self-stretch text-[#0F2A5C] font-semibold text-[48px] leading-[62.4px] font-poppins font-feature-no-ligatures">
         Choose the Package that <br> Fits Your Needs
     </span>
 
     <div class="flex flex-wrap justify-center gap-8">
         {% for subscriptionPackage in subscriptionPackages %}
         <div
-            class="relative w-[360px] bg-[#f8fafc] rounded-[12px] hover:bg-[#0459E5] hover:shadow-[8px_8px_3px_0px_rgba(0,89,255,0.16)] group transition-all">
+            class="mt-10 relative w-[360px] bg-[#f8fafc] rounded-[12px] hover:bg-[#0459E5] hover:shadow-[8px_8px_3px_0px_rgba(0,89,255,0.16)] group transition-all">
             <div
                 class="flex justify-center items-center absolute left-[50%] top-[-45px] transform -translate-x-[50%] w-[100px] h-[100px] p-[10px] rounded-full border-2 border-[#0459E5] bg-white shadow-[0px_12px_36px_0px_rgba(4,89,229,0.16)]">
                 <img src="{{ subscriptionPackage.packageIcon.url }}" alt="Icon" class="w-full h-full object-cover">

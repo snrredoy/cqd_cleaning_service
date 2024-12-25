@@ -12,9 +12,8 @@
 
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="http://127.0.0.1:8000/media/{{ subscriptionPackageForm.packageIcon.value }}"
-                            alt="upload icon to show" class="d-block rounded" height="100" width="100"
-                            id="uploadedAvatar" />
+                        <img src="{% if subscriptionPackageForm.packageIcon.value %}{{ subscriptionPackageForm.packageIcon.url }}{% else %}{% static 'img\cloud-computing.png' %}{% endif %}"
+                            alt="upload icon to show" class="d-block rounded" width="60px" id="uploadedAvatar" />
                         <div class="button-wrapper">
                             <label for="packageIcon" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload Icon</span>
@@ -51,9 +50,26 @@
                 </div>
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary me-2">Add Package</button>
-                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    <button type="reset" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
                 </div>
             </div>
         </form>
     </div>
-    {% endblock %}
+</div>
+
+
+<script>
+
+    document.getElementById("packageIcon").onchange = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById("uploadedAvatar").src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    document.getElementById("cancelBtn").onclick = function () {
+        window.location.href = "{% url 'showSubscriptionPackage' %}";
+    };
+</script>
+{% endblock %}

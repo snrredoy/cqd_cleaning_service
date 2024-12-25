@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'home',
     'adminControl',
     'adminSubscriptionPackage',
+    'adminPrivacyCore',
+    
 ]
 
 MIDDLEWARE = [

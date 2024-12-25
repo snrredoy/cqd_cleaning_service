@@ -22,10 +22,16 @@
                 </div>
                 <div class="mt-2">
                     <button id="submitBtn" type="submit" class="btn btn-primary me-2">Update</button>
-                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    <button type="reset" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    document.getElementById("cancelBtn").onclick = function () {
+        window.location.href = "{% url 'showWhySubscriptionShareList' %}";
+    };
+</script>
 {% endblock %}

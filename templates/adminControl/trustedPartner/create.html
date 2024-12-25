@@ -17,9 +17,8 @@
             {% else %}
             <div class="card-body">
                 <div class="d-flex align-items-start align-items-sm-center gap-4">
-                    <img src="http://127.0.0.1:8000/media/{{ trustedForm.partner_one.value }}"
-                        alt="upload image to show " class="d-block rounded" height="100" width="100"
-                        id="uploadedAvatar" />
+                    <img src="{% if trustedForm.partner_one.value %}{{ trustedForm.partner_one.url }}{% else %}{% static 'img\cloud-computing.png' %}{% endif %}"
+                        alt="upload image to show " class="d-block rounded" width="100px" id="uploadedAvatar" />
                     <div class="button-wrapper">
                         <label for="partner_one" class="btn btn-primary me-2 mb-4" tabindex="0">
                             <span class="d-none d-sm-block">Upload Partner Logo</span>
@@ -38,12 +37,19 @@
             </div>
             <div class="mt-2">
                 <button type="submit" class="btn btn-primary me-2">Add Partner</button>
-                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                <button type="reset" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
             </div>
             {% endif %}
         </form>
     </div>
 </div>
+
+
+<script>
+    document.getElementById("cancelBtn").onclick = function () {
+        window.location.href = "{% url 'showTrustedPartners' %}";
+    };
+</script>
 
 
 {% endblock %}

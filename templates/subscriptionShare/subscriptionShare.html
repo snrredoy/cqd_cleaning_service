@@ -1,11 +1,10 @@
 {% load static %}
 
 <div
-    class=" w-[97%] mx-[27px] inline-flex flex-col justify-center items-start gap-12 px-[262px] py-[120px] rounded-2xl bg-gradient-to-b from-[rgba(133,210,255,0.60)] to-[rgba(214,238,255,0.60)]">
+    class=" w-[97%] mx-[27px] inline-flex flex-col justify-center items-start gap-4 px-[262px] py-[120px] rounded-2xl bg-gradient-to-b from-[rgba(133,210,255,0.60)] to-[rgba(214,238,255,0.60)]">
     <span class="text-[#0459E5] font-medium text-[18px] leading-[27px] font-poppins">
         {{ whySubscriptionShares.title }}</span>
-    <span
-        class="self-stretch text-[#0F2A5C] font-semibold text-[48px] leading-[62.4px] font-poppins font-feature-no-ligatures">
+    <span class="mb-10 self-stretch text-[#0F2A5C] font-semibold text-5xl font-poppins font-feature-no-ligatures">
         {{ whySubscriptionShares.subTitle }}</span>
 
     <div class="flex flex-wrap gap-8 self-stretch">
@@ -15,15 +14,28 @@
                 <img src="{{ whySubscriptionShareList.icon.url }}" alt="Icon">
             </div>
             <div class="ms-2">
-                <p class="text-[#0F2A5C] font-semibold text-[20px] leading-[30px] font-poppins self-stretch">
+                <p class="text-[#0F2A5C] font-semibold text-xl font-poppins self-stretch">
                     {{ whySubscriptionShareList.modelTitle }}</p>
-                <p
-                    class="text-[#5B6477] font-normal text-[16px] leading-[24px] font-poppins self-stretch font-feature-no-ligatures">
+                <p class="text-[#5B6477] font-normal text-base font-poppins self-stretch font-feature-no-ligatures">
                     {{ whySubscriptionShareList.modelDescription }}
                 </p>
             </div>
         </div>
         {% endfor %}
     </div>
+    <div class="flex mt-8 self-center">
+        <button class="bg-[#02B71F] py-4 rounded-full text-white flex justify-between px-8 font-medium text-lg">
+            {{ generalData.buttonText }}
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
+                class="ml-1 mt-[2px]">
+                <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
+                <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
+                <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />
+                <path d="M5 12.5H19M19 12.5L13 18.5M19 12.5L13 6.5" stroke="#EEFFEF" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+
 
 </div>

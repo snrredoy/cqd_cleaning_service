@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="mainBody h-[80vh] w-[97%] mt-8 mx-[30px] ">
+<div class="mainBody h-[85vh] w-[97%] mt-8 mx-[30px] ">
   <div class="heroGradientImg h-full w-full rounded-3xl relative">
     <img class="bg-cover w-full h-full rounded-3xl heroImage" src="http://127.0.0.1:8000/{{ generalData.banner.url }}"
       alt="Hero Image" />
@@ -11,25 +11,28 @@
         );">
     </div>
   </div>
-  <div class="heroText absolute top-[35%] left-[10%] z-40 flex flex-col justify-between h-[30%]">
-    <h1 class="text-4xl font-bold text-white mt-4">
+  <div class="heroText absolute top-[30%] left-[15%] z-40 flex flex-col justify-between h-[30%]">
+    <h1 class="text-6xl font-bold text-white mt-4">
       CQD's Interactive <br />
       Subscription sharing <br />
       Process
     </h1>
-    <p class="text-white mt-4">
+    <p class="text-white mt-6 text-2xl">
       Revolutionizing the Commercial Cleaning Industry in 2025.
     </p>
 
-    <button class="bg-[#02B71F] py-2 rounded-full text-white flex justify-between px-4 w-[180px]">
-      {{ generalData.buttonText}}
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none" class="ml-1">
-        <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
-        <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
-        <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />
-        <path d="M5 12.5H19M19 12.5L13 18.5M19 12.5L13 6.5" stroke="#EEFFEF" stroke-width="2" stroke-linecap="round"
-          stroke-linejoin="round" />
-      </svg>
-    </button>
+    <div class="flex mt-8 ">
+      <button class="bg-[#02B71F] py-4 rounded-full text-white flex justify-between px-8 font-medium text-lg">
+        {{ generalData.buttonText }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
+          class="ml-1 mt-[2px]">
+          <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
+          <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
+          <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />
+          <path d="M5 12.5H19M19 12.5L13 18.5M19 12.5L13 6.5" stroke="#EEFFEF" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
   </div>
 </div>

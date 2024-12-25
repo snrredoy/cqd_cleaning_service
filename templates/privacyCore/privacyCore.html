@@ -1,0 +1,36 @@
+{% load static %}
+<div class="bg-[#fff] py-16 rounded-3xl w-[97%] mx-[30px] px-[260px] py-[120px]">
+    <div class="flex flex-col lg:flex-row items-stretch lg:justify-between">
+        <!-- Right Section (Content) -->
+        <div class="lg:w-2/4 w-full lg:pl-10 ps-24 flex flex-col justify-between">
+            <h4 class="text-[#02B71F] font-medium mb-4">Privacy Core</h4>
+            <h2 class="text-5xl font-semibold text-[#0F2A5C] mb-8">A Seamless Experience <br>
+                with Privacy at Its Core</h2>
+
+            <!-- List of Features -->
+            <div class="space-y-6">
+                <!-- Feature -->
+                {% for privacyCore in privacyCores %}
+                <div class="flex items-center self-stretch rounded-xl p-4 w-[90%]">
+                    <div
+                        class="flex w-16 h-16 p-4 justify-center items-center rounded-[59.733px] border border-[#0459E5]">
+                        <img src="{{ privacyCore.icon.url }}" alt="Feature Icon" class="w-6 h-6">
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-xl font-semibold text-[#0F2A5C]">{{ privacyCore.title }}</h4>
+                        <p class="text-[#5B6477] taxt-base font-normal">{{ privacyCore.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Left Section (Image) -->
+        <div class="lg:w-2/4 w-full mb-8 lg:mb-0">
+            <div class="w-full self-stretch max-w-lg h-full">
+                <img src="{{ privacyCoreImage.image.url }}" alt="Interactive Platform"
+                    class="rounded-lg shadow-lg w-full h-full object-cover" />
+            </div>
+        </div>
+
+    </div>
+</div>
