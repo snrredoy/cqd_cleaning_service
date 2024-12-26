@@ -28,8 +28,8 @@
                                 class="shadow bg-body-tertiary rounded">
                         </div>
                     </td>
-                    <td class="text-center d-flex justify-content-center align-items-center">
-                        <div class="shadow p-3 bg-body-tertiary rounded " style="width: 70.1px;">
+                    <td class="text-center">
+                        <div class="shadow p-3 bg-body-tertiary rounded " style="width: 60px;">
                             <img src="{{ interactivePlatformList.icon.url }}" alt="Icon of Interactive Platform"
                                 style="width: 100%;">
                         </div>
@@ -80,9 +80,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#example').DataTable({
-            "paging": false,
-            "searching": false,
-            "ordering": false,
+            "paging": true,
+            "searching": true,
+            "ordering": true,
             "pageLength": 4,
             // "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "All"]]
             // "order": [[1, "asc"]]  // Set default ordering on the second column

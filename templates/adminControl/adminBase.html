@@ -40,6 +40,8 @@
 
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="{% static 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/vendor/libs/apex-charts/apex-charts.css' %}" />
+
 
   <!-- Helpers -->
   <script src="{% static 'assets/vendor/js/helpers.js' %}"></script>
@@ -90,7 +92,7 @@
           <li class="menu-item {% if request.path == '/adminControl/update/10/' %}active{% endif %}">
             <a href="{% url 'updateGeneralSetting' pk=10 %}"
               class="menu-link {% if request.path == '/adminControl/update/10/' %}active{% endif %}">
-              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <i class='bx bx-building menu-icon'></i>
               <div data-i18n="CompanyDetails">Company Details</div>
             </a>
           </li>
@@ -104,7 +106,7 @@
             class="menu-item {% if request.path == '/adminControl/showTrustedPartners/' or request.path == '/adminControl/addTrustedPartner/' or request.path|slice:':35' == '/adminControl/updateTrustedPartner/' %}active{% endif %}">
             <a href="{% url 'showTrustedPartners' %}"
               class="menu-link {% if request.path == '/adminControl/showTrustedPartners/' %}active{% endif %}">
-              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <i class="fa-regular fa-handshake menu-icon"></i>
               <div data-i18n="TrustedPartners">Trusted Partner</div>
             </a>
           </li>
@@ -114,7 +116,7 @@
             class="menu-item {% if request.path == '/adminControl/showCommercialServices/' or request.path|slice:':39' == '/adminControl/updateCommercialServices/' or request.path == '/adminControl/addCommercialServices/' %}active{% endif %}">
             <a href="{% url 'showCommercialServices' %}"
               class="menu-link {% if request.path == '/adminControl/showCommercialServices/' %}active{% endif %}">
-              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <i class='bx bxs-brush-alt menu-icon'></i>
               <div data-i18n="CommercialService">Commercial Service</div>
             </a>
           </li>
@@ -124,7 +126,7 @@
             class="menu-item {% if request.path == '/adminControl/showInteractivePlatform/' or request.path|slice:':44' == '/adminControl/updateInteractivePlatformList/' %}active{% endif %}">
             <a href="{% url 'showInteractivePlatform' %}"
               class="menu-link {% if request.path == '/adminControl/showInteractivePlatform/' %}active{% endif %}">
-              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <i class='bx bxs-layer menu-icon'></i>
               <div data-i18n="InteractivePlatform">Interactive Platform</div>
             </a>
           </li>
@@ -134,8 +136,8 @@
             class="menu-item {% if request.path == '/adminControl/showWhySubscriptionShareList/' or request.path == '/adminControl/updateWhySubscriptionShare/1/' or request.path|slice:':45' == '/adminControl/updateWhySubscriptionShareList/' %}active{% endif %}">
             <a href="{% url 'showWhySubscriptionShareList' %}"
               class="menu-link {% if request.path == '/adminControl/showWhySubscriptionShareList/' %}active{% endif %}">
-              <i class="menu-icon tf-icons bx bx-home-circle"></i>
-              <div data-i18n="SubscriptionShare">Subscription Share</div>
+              <i class="fa-regular fa-circle-question menu-icon"></i>
+              <div data-i18n="SubscriptionShare">Subscription Model</div>
             </a>
           </li>
 
@@ -144,7 +146,7 @@
             class="menu-item {% if request.path == '/adminControl/subscriptionPackage/showSubscriptionPackage/' or request.path == '/adminControl/subscriptionPackage/addSubscriptionPackage/' or request.path|slice:':60' == '/adminControl/subscriptionPackage/updateSubscriptionPackage/' %}active{% endif %}">
             <a href="{% url 'showSubscriptionPackage' %}"
               class="menu-link {% if request.path == '/adminControl/subscriptionPackage/showSubscriptionPackage/' %}active{% endif %}">
-              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <i class="fa-regular fa-rectangle-list menu-icon"></i>
               <div data-i18n="SubscriptionPackage">Subscription Package</div>
             </a>
           </li>
@@ -154,7 +156,7 @@
             class="menu-item {% if request.path == '/adminControl/privacyCore/showPrivacyCore/' or request.path|slice:':44' == '/adminControl/privacyCore/updatePrivacyCore/' %}active{% endif %}">
             <a href="{% url 'showPrivacyCore' %}"
               class="menu-link {% if request.path == '/adminControl/privacyCore/showPrivacyCore/' %}active{% endif %}">
-              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <i class="fa-solid fa-shield menu-icon"></i>
               <div data-i18n="PrivacyCore">Privacy Core</div>
             </a>
           </li>
@@ -318,13 +320,15 @@
   <!-- endbuild -->
 
   <!-- Vendors JS -->
+  <script src="{% static 'assets/vendor/libs/apex-charts/apexcharts.js' %}"></script>
+
 
   <!-- Main JS -->
   <script src="{% static 'assets/js/main.js' %}"></script>
 
   <!-- Page JS -->
   <script src="{% static 'assets/js/pages-account-settings-account.js' %}"></script>
-
+  <script src="{% static 'assets/js/dashboards-analytics.js' %}"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 

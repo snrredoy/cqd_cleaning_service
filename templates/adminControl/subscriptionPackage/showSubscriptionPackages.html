@@ -16,8 +16,8 @@
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th class="text-center ">Package No</th>
-                    <th class="text-center">Package Icon</th>
+                    <th class="text-start w-px-20">Package No</th>
+                    <th class="">Package Icon</th>
                     <th class="">Package Name</th>
                     <th class="text-start">Package Price</th>
                     <th class="">Package Minimum Clients</th>
@@ -28,8 +28,8 @@
                 {% for subscriptionPackage in subscriptionPackages %}
                 <tr>
                     <td class="text-center">{{ forloop.counter }}</td>
-                    <td class="d-flex justify-content-center align-items-center">
-                        <div class="shadow bg-body-tertiary rounded p-3" style="width: 80px;">
+                    <td class="">
+                        <div class="shadow bg-body-tertiary rounded p-2" style="width: 80px;">
                             <img src="{{ subscriptionPackage.packageIcon.url }}" alt="Image of Commercial Service"
                                 style="width: 100%;">
                         </div>

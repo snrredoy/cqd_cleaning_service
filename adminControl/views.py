@@ -8,7 +8,7 @@ from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , I
 def dashboard(request):
     form = GeneralForm(instance=General.objects.first())
 
-    return render(request, 'adminControl/adminBase.html' , {'form': form , 'title': '' , 'breadcrumb': 'DashBoard'})
+    return render(request, 'adminControl/dashboard/dashboard.html' , {'form': form , 'title': '' , 'breadcrumb': 'DashBoard'})
 
 
 def updateGeneralSetting(request , pk):

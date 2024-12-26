@@ -1,31 +1,30 @@
 {% load static %}
-<div class="bg-[#fff] py-16 rounded-3xl w-[97%] mx-[30px] px-[262px] py-[120px]">
-    <div class="container mx-auto flex flex-col lg:flex-row items-stretch lg:justify-between px-48">
+<div class="bg-[#fff] py-16 rounded-3xl w-[97%] mx-[30px] px-[260px] py-[120px]">
+    <div class="container mx-auto flex items-stretch justify-between">
         <!-- Left Section (Image) -->
-        <div class="lg:w-2/4 w-full mb-8 lg:mb-0 flex-grow">
-            <div class="w-full self-stretch max-w-lg h-full">
+        <div class="w-6/12 flex justify-center items-center">
+            <div class="w-full  h-full">
                 <img src="{{ interactivePlatforms.image.url }}" alt="Interactive Platform"
                     class="rounded-lg shadow-lg w-full h-full object-cover" />
             </div>
         </div>
 
         <!-- Right Section (Content) -->
-        <div class="lg:w-2/4 w-full lg:pl-24 ps-24 flex flex-col justify-center">
+        <div class=" w-5/12 flex flex-col justify-center">
             <h4 class="text-[#02B71F] font-medium mb-4">How It Works</h4>
-            <h2 class="text-5xl font-semibold text-[#0F2A5C] mb-8">The Interactive Platform</h2>
+            <h2 class="text-5xl font-semibold text-[#0F2A5C] mb-14">The Interactive Platform</h2>
 
             <!-- List of Features -->
             <div class="space-y-6">
                 <!-- Feature -->
                 {% for interactivePlatformList in interactivePlatformLists %}
                 <div class="flex items-center self-stretch rounded-xl bg-[#EDF8FF] p-4">
-                    <div
-                        class="flex w-16 h-16 p-4 justify-center items-center rounded-[59.733px] border border-[#0459E5]">
+                    <div class="flex w-16 h-16 p-4 justify-center items-center rounded-[60px] border border-[#0459E5]">
                         <img src="{{ interactivePlatformList.icon.url }}" alt="Feature Icon" class="w-6 h-6">
                     </div>
                     <div class="ml-4">
                         <h4 class="text-xl font-semibold text-[#0F2A5C]">{{ interactivePlatformList.title }}</h4>
-                        <p class="text-[#5B6477] taxt-base font-normal">{{ interactivePlatformList.description }}</p>
+                        <p class="text-[#5B6477] taxt-base font-normal0">{{ interactivePlatformList.description }}</p>
                     </div>
                 </div>
                 {% endfor %}

@@ -39,7 +39,7 @@
             <thead>
                 <tr>
                     <th class="text-center w-px-20">Subscription No</th>
-                    <th class="text-center">Subscription Icon</th>
+                    <th class="">Subscription Icon</th>
                     <th class="">Subscription Title</th>
                     <th class="">Subscription Description</th>
                     <th class="text-center">Actions</th>
@@ -49,8 +49,8 @@
                 {% for whySubscriptionShareList in whySubscriptionShareLists %}
                 <tr>
                     <td class="text-center">{{ forloop.counter }}</td>
-                    <td class="d-flex justify-content-center align-items-center">
-                        <div class="shadow bg-body-tertiary rounded p-2" style="width: 60px;">
+                    <td class="">
+                        <div class="shadow bg-body-tertiary rounded p-3" style="width: 60px;">
                             <img src="{{ whySubscriptionShareList.icon.url }}" alt="Image of Subscription Share"
                                 style="width: 100%;">
                         </div>

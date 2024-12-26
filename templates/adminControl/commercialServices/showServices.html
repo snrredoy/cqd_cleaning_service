@@ -17,11 +17,11 @@
             <thead>
                 <tr>
                     <th class="text-center">Services No</th>
-                    <th class="text-center">Services Icon</th>
-                    <th class="text-center">Services Wattermark</th>
-                    <th class="text-center">Services Title</th>
-                    <th class="text-center">Services Description</th>
-                    <th class="text-center">Section Title</th>
+                    <th class="">Services Icon</th>
+                    <th class="">Services Wattermark</th>
+                    <th class="">Services Title</th>
+                    <th class="">Services Description</th>
+                    <th class="">Section Title</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -29,14 +29,14 @@
                 {% for commercialService in commercialServices %}
                 <tr>
                     <td class="text-center">{{ forloop.counter }}</td>
-                    <td class="d-flex justify-content-center align-items-center">
-                        <div class="shadow bg-body-tertiary rounded p-3" style="width: 70px;">
+                    <td class="">
+                        <div class="shadow bg-body-tertiary rounded p-3" style="width: 60px;">
                             <img src="{{ commercialService.icon.url }}" alt="Image of Commercial Service"
                                 style="width: 100%;">
                         </div>
                     </td>
                     <td class="">
-                        <div class="shadow bg-body-tertiary rounded p-1" style="width: 70px;">
+                        <div class="shadow bg-body-tertiary rounded p-1" style="width: 60px;">
                             <img src="{{ commercialService.wattermarkIcon.url }}" alt="Commercial Service Wattermark"
                                 style="width: 100%;">
                         </div>
@@ -47,7 +47,7 @@
                     <td class="">{{ commercialService.mainTitle }}</td>
                     <td class="text-center">
                         <a href="{% url 'updateCommercialServices' commercialService.pk %}">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary mb-2">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                         </a>

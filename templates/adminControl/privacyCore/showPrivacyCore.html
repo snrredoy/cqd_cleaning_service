@@ -24,10 +24,10 @@
                     <td>
                         <div class=" d-flex justify-content-center align-items-center" style="width: 120px;">
                             <img src="{{ privacyCoreImages.image.url }}" alt="Image of Interactive Platform"
-                                style="width: 40%;" class="shadow bg-body-tertiary rounded">
+                                style="width: 50%;" class="shadow bg-body-tertiary rounded">
                         </div>
                     </td>
-                    <td class="text-center d-flex justify-content-center align-items-center">
+                    <td class="text-center ">
                         <div class="shadow p-3 bg-body-tertiary rounded " style="width: 60px;">
                             <img src="{{ privacyCore.icon.url }}" alt="Icon of Interactive Platform"
                                 style="width: 100%;">
@@ -79,9 +79,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#example').DataTable({
-            "paging": false,
-            "searching": false,
-            "ordering": false,
+            "paging": true,
+            "searching": true,
+            "ordering": true,
             "pageLength": 4,
             // "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "All"]]
             // "order": [[1, "asc"]]  // Set default ordering on the second column
