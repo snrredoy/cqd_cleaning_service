@@ -161,6 +161,18 @@
             </a>
           </li>
 
+          <!-- Cleaning Services -->
+          <li
+            class="menu-item {% if request.path == '/adminControl/cleaningService/showCleaningService/' or request.path|slice:':60' == '/adminControl/cleaningService/updateCleaningServiceHeadding/' %}active{% endif %}">
+            <a href="{% url 'showCleaningService' %}"
+              class="menu-link {% if request.path == '/adminControl/cleaningService/showCleaningService/' %}active{% endif %}">
+              <i class='bx bxs-brush menu-icon'></i>
+              <div data-i18n="CleaningServices">Cleaning Services</div>
+            </a>
+          </li>
+
+
+
           <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Pages</span>
           </li>

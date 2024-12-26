@@ -1,0 +1,42 @@
+{% extends 'adminControl/adminBase.html' %}
+{% load static %}
+
+{% block general %}
+<div class="card mb-4">
+    <h5 class="card-header">Update Section Heading</h5>
+
+    {% comment %}
+    <div class="card-body">
+        <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <hr class="mb-4" />
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="title" class="form-label">Section Heading</label>
+                    <input class="form-control" type="text" id="title" name="title" placeholder="Title here"
+                        value="{{ sectionHeadingForm.title.value }}" autofocus />
+                    {{ sectionHeadingForm.media }}
+                </div>
+                <div class="mt-2">
+                    <button id="submitBtn" type="submit" class="btn btn-primary me-2">Update</button>
+                    <button type="button" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endcomment %}
+
+    <div class="card-body">
+        <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ sectionHeadingForm.media }}
+            {{ sectionHeadingForm.as_p }}
+            <button type="submit">Update</button>
+    </div>
+
+    <script>
+        document.getElementById("cancelBtn").onclick = function () {
+            window.location.href = "{% url 'showCleaningService' %}";
+        };
+    </script>
+    {% endblock %}

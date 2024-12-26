@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'adminControl',
     'adminSubscriptionPackage',
     'adminPrivacyCore',
+    'adminCleaningService',
+    'ckeditor',
+    'ckeditor_uploader',
     
 ]
 
@@ -134,3 +137,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CKEDITOR_UPLOAD_PATH = "ckeditor/"
+CKEDITOR_RESTRICT_BY_USER = False
+CKEDITOR_REQUIRE_STAFF = False
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
+        ]
+    },
+}

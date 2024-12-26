@@ -1,0 +1,112 @@
+{% extends 'adminControl/adminBase.html' %}
+{% load static %}
+
+{% block general %}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h1>Cleaning Service Section Title</h1> <br>
+        <table class="table" style="width: 75%">
+            <thead>
+                <tr>
+                    <th scope="col">Heading No</th>
+                    <th scope="col">Section Title</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>{{ cleaningServiceHeadding.title }}</td>
+                    <td>
+                        <a href="{% url 'updateCleaningServiceHeadding' pk=1 %}">
+                            <button class="btn btn-primary">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% comment %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h1>Show Subscription Share List</h1>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="text-center w-px-20">Subscription No</th>
+                    <th class="">Subscription Icon</th>
+                    <th class="">Subscription Title</th>
+                    <th class="">Subscription Description</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for whySubscriptionShareList in whySubscriptionShareLists %}
+                <tr>
+                    <td class="text-center">{{ forloop.counter }}</td>
+                    <td class="">
+                        <div class="shadow bg-body-tertiary rounded p-3" style="width: 60px;">
+                            <img src="{{ whySubscriptionShareList.icon.url }}" alt="Image of Subscription Share"
+                                style="width: 100%;">
+                        </div>
+                    </td>
+                    <td class="">{{ whySubscriptionShareList.modelTitle }}</td>
+                    <td class="">{{ whySubscriptionShareList.modelDescription }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'updateWhySubscriptionShareList' whySubscriptionShareList.id %}">
+                            <button class="btn btn-primary">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endcomment %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% else %}bg-success text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Notification</div>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "pageLength": 4,
+            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "All"]]
+            // "order": [[1, "asc"]]  // Set default ordering on the second column
+        });
+    });
+</script>
+
+{% endblock %}

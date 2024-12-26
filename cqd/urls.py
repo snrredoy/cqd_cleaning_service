@@ -26,6 +26,8 @@ urlpatterns = [
     path("adminControl/",include("adminControl.urls")),
     path("adminControl/subscriptionPackage/",include("adminSubscriptionPackage.urls")),
     path("adminControl/privacyCore/",include("adminPrivacyCore.urls")),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path("adminControl/cleaningService/",include("adminCleaningService.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
