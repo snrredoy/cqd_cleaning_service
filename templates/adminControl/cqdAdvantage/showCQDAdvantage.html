@@ -1,0 +1,122 @@
+{% extends 'adminControl/adminBase.html' %}
+{% load static %}
+
+{% block general %}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h1>CQD Advantage Section Title</h1> <br>
+        <table class="table" style="width: 75%">
+            <thead>
+                <tr>
+                    <th scope="col">Heading No</th>
+                    <th scope="col">Section Title</th>
+                    <th scope="col">Section Sub Title</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="text-wrap" style="max-width: 250px;">{{ cqdAdvantageSection.title | safe }}</td>
+                    <td class="text-wrap" style="max-width: 250px;">{{ cqdAdvantageSection.subtitle | safe }}</td>
+                    <td>
+                        <a href="{% url 'updateCQDAdvantageSection' pk=1 %}">
+                            <button class="btn btn-primary">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h1>Show CQD Advantage</h1>
+        <div class="float-end mb-3">
+            <a href="{% url 'addCQDAdvantage' %}">
+                <button class="btn btn-info">Add CQD Advantage</button>
+            </a>
+        </div>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="text-start w-px-20">Advantage No</th>
+                    <th class="text-start">Advantage Icon</th>
+                    <th class="" style="max-width: 200px;">Advantage Title</th>
+                    <th class="" style="max-width: 300px;">Advantage Description</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cqdAdvantage in cqdAdvantages %}
+                <tr>
+                    <td class="text-center">{{ forloop.counter }}</td>
+                    <td class="">
+                        <div class="shadow bg-body-tertiary rounded p-3" style="width: 60px;">
+                            <img src="{{ cqdAdvantage.icon.url }}" alt="Icon" style="width: 100%;">
+                        </div>
+                    </td>
+                    <td class="text-wrap" style="max-width: 200px; white-space: normal;">
+                        {{ cqdAdvantage.title | safe }}</td>
+                    <td class="text-wrap" style="max-width: 300px;">{{ cqdAdvantage.description | safe }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'updateCQDAdvantage' cqdAdvantage.id %}">
+                            <button class="btn btn-primary mb-2">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </a>
+                        <a href="{% url 'deleteCQDAdvantage' cqdAdvantage.id %}">
+                            <button class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'success' %}bg-success text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Notification</div>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "pageLength": 4,
+            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "All"]]
+            // "order": [[1, "asc"]]  // Set default ordering on the second column
+        });
+    });
+</script>
+
+{% endblock %}

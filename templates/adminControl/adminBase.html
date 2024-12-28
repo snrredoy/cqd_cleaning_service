@@ -17,6 +17,9 @@
   <!-- Box icons -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=loyalty" />
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -170,6 +173,27 @@
             </a>
           </li>
 
+          <!-- CQD Advantage -->
+          <li
+            class="menu-item {% if request.path == '/adminControl/cqdAdvantage/showCQDAdvantage/' or request.path|slice:':53' == '/adminControl/cqdAdvantage/updateCQDAdvantageSection/' or request.path|slice:':46' == '/adminControl/cqdAdvantage/updateCQDAdvantage/' or request.path == '/adminControl/cqdAdvantage/addCQDAdvantage/' %}active{% endif %}">
+            <a href="{% url 'showCQDAdvantage' %}"
+              class="menu-link {% if request.path == '/adminControl/cqdAdvantage/showCQDAdvantage/' %}active{% endif %}">
+              <span class="material-symbols-outlined menu-icon">
+                loyalty
+              </span>
+              <div data-i18n="CleaningServices">CQD Advantage</div>
+            </a>
+          </li>
+
+          <!-- Contact Us -->
+          <li
+            class="menu-item {% if request.path == '/adminControl/contactUs/showContactUs/' or request.path|slice:':40' == '/adminControl/contactUs/updateContactUs/' %}active{% endif %}">
+            <a href="{% url 'showContactUs' %}"
+              class="menu-link {% if request.path == '/adminControl/contactUs/showContactUs/' %}active{% endif %}">
+              <i class='bx bx-phone menu-icon'></i>
+              <div data-i18n="CleaningServices">Contact Us</div>
+            </a>
+          </li>
 
 
           <li class="menu-header small text-uppercase">

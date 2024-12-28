@@ -3,6 +3,9 @@ from adminControl.models import General , TrustedPartner , CommercialServices , 
 from adminSubscriptionPackage.models import SubscriptionPackage
 from adminPrivacyCore.models import PrivacyCore, PrivacyCoreImage
 from adminCleaningService.models import CleaningService , CleaningServiceHeadding
+from adminCQDAdvantage.models import CQDAdvantage , CQDAdvantageSection
+from adminContactUs.models import ContactUs
+
 
 # Create your views here.
 def home(request):
@@ -18,6 +21,9 @@ def home(request):
     privacyCoreImage = PrivacyCoreImage.objects.first()
     cleaningServiceHeadding = CleaningServiceHeadding.objects.first()
     cleaningServices = CleaningService.objects.all()
+    cqdAdvantageSection = CQDAdvantageSection.objects.first()
+    cqdAdvantage = CQDAdvantage.objects.all()
+    contactUs=ContactUs.objects.first()
 
 
     context = {
@@ -33,5 +39,8 @@ def home(request):
         'privacyCoreImage': privacyCoreImage,
         'cleaningServiceHeadding': cleaningServiceHeadding,
         'cleaningServices': cleaningServices,
+        'cqdAdvantageSection': cqdAdvantageSection,
+        'cqdAdvantages': cqdAdvantage,
+        'contactUs':contactUs
     }
     return render(request, 'base.html' , context=context )

@@ -1,0 +1,30 @@
+<div
+    class="w-[97%] mx-[25px] px-[260px] py-[120px] bg-[#F2FAFF] rounded-3xl inline-flex flex-col justify-center items-center overflow-x-hidden">
+    <span class="text-[#02B71F] text-lg font-medium mb-4 text-center font-poppins font-feature-no-ligatures">
+        {{ cqdAdvantageSection.title | safe }}</span>
+    <span
+        class="text-5xl font-semibold text-[#0F2A5C] text-center mb-14 font-poppins self-stretch font-feature-no-ligatures">
+        {{ cqdAdvantageSection.subtitle | safe }}</span>
+
+    <div class="flex flex-wrap justify-center gap-8">
+        {% for cqdAdvantage in cqdAdvantages %}
+        <div class="mt-14 relative w-[45%] bg-[#fff] rounded-[12px] p-6">
+            <div
+                class="flex justify-center items-center absolute left-[50%] top-[-60px] transform -translate-x-[50%] w-[140px] h-[140px] p-[30px] rounded-full border-2 border-[#0459E5] bg-white shadow-[0px_12px_36px_0px_rgba(4,89,229,0.16)]">
+                <img src="{{ cqdAdvantage.icon.url }}" alt="Icon" class="w-full h-full object-cover">
+            </div>
+            <div class="flex flex-col justify-center items-center pt-[120px] px-[24px] pb-[24px] ">
+                <span
+                    class="text-[#0F2A5C] text-center font-semibold text-2xl font-poppins self-stretch font-feature-no-ligatures mb-3">
+                    {{ cqdAdvantage.title | safe }}
+                </span>
+                <span
+                    class="text-[#5B6477] text-center font-normal text-base font-poppins self-stretch font-feature-no-ligatures">
+                    {{ cqdAdvantage.description | safe }}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>

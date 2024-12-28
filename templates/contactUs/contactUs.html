@@ -1,0 +1,31 @@
+<div
+    class="w-[97%] mx-[30px] px-[260px] py-[110px] bg-[#F2FAFF] rounded-3xl inline-flex flex-col justify-center items-center">
+    <div class="flex flex-col justify-center items-center relative">
+        <img src="{{ contactUs.image.url }}" alt="image" class="w-full object-cover bg-cover rounded-3xl">
+        <div class="absolute top-0 left-0 h-full w-full z-20 rounded-3xl" style="background: rgba(15, 42, 92, 0.50);">
+        </div>
+    </div>
+
+    <div class="w-full absolute z-40 flex flex-col justify-between items-center">
+        <span class="text-5xl font-semibold font-poppins text-center text-white mt-4">
+            {{ contactUs.title|safe }}
+        </span>
+        <span class="text-white mt-6 text-base text-center font-poppins font-normal">
+            {{ contactUs.description |safe }}
+        </span>
+
+        <div class="flex mt-8 ">
+            <button class="bg-[#02B71F] py-4 rounded-full text-white flex justify-between px-8 font-medium text-lg">
+                {{ contactUs.buttonText }}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
+                    class="ml-1 mt-[2px]">
+                    <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
+                    <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
+                    <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />
+                    <path d="M5 12.5H19M19 12.5L13 18.5M19 12.5L13 6.5" stroke="#EEFFEF" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>

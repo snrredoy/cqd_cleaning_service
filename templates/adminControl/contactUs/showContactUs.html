@@ -1,0 +1,83 @@
+{% extends 'adminControl/adminBase.html' %}
+{% load static %}
+
+{% block general %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h1>Show Contact Us</h1>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="text-start w-px-20">Contact UUID</th>
+                    <th class="text-center">Image</th>
+                    <th class="" style="max-width: 200px;">Contact Title</th>
+                    <th class="" style="max-width: 300px;">Contact Description</th>
+                    <th class="" style="max-width: 300px;">Button Text</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contactUs %}
+                <tr>
+                    <td class="text-center">{{ contact.id }}</td>
+                    <td class="">
+                        <div class="shadow bg-body-tertiary rounded p-1" style="width: 150px;">
+                            <img src="{{ contact.image.url }}" alt="Icon" style="width: 100%;">
+                        </div>
+                    </td>
+                    <td class="text-wrap" style="max-width: 200px; white-space: normal;">
+                        {{ contact.title | safe }}</td>
+                    <td class="text-wrap" style="max-width: 300px;">{{ contact.description | safe }}</td>
+                    <td class="text-wrap" style="max-width: 300px;">{{ contact.buttonText | safe }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'updateContactUs' contact.id %}">
+                            <button class="btn btn-primary mb-2">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'success' %}bg-success text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Notification</div>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "pageLength": 4,
+            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "All"]]
+            // "order": [[1, "asc"]]  // Set default ordering on the second column
+        });
+    });
+</script>
+
+{% endblock %}

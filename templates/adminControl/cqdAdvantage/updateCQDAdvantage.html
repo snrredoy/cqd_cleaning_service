@@ -1,0 +1,104 @@
+{% extends 'adminControl/adminBase.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+</style>
+{% endblock %}
+
+{% block general %}
+<div class="card mb-4">
+    <h5 class="card-header">CQD Advantage</h5>
+
+    <div class="card-body">
+        <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ cqdAdvantageForm.media }}
+            <div class="d-flex">
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4 ">
+                        <img src="http://127.0.0.1:8000/media/{{ cqdAdvantageForm.icon.value }}"
+                            alt="upload icon to show" class="d-block rounded p-2" width="80px" id="uploadedIcon" />
+                        <div class="button-wrapper">
+                            <label for="icon" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Upload Icon</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="icon" name="icon" class="account-file-input" hidden
+                                    accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block" id="resetIcon">Reset</span>
+                            </button>
+                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="mb-4" />
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="title" class="form-label">advantage title</label>
+                    {{ cqdAdvantageForm.title }}
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="description" class="form-label">advantage Description</label>
+                    {{ cqdAdvantageForm.description }}
+                </div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary me-2">Update Advantage</button>
+                    <button type="button" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% if messages %}
+{% for message in messages %}
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Notification</div>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<script>
+
+    const iconInput = document.getElementById('icon');
+    const uploadedIcon = document.getElementById('uploadedIcon');
+    const resetIconBtn = document.getElementById('resetIcon');
+    const originalIconSrc = uploadedIcon.src;
+
+    iconInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedIcon.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    resetIconBtn.addEventListener('click', function () {
+        iconInput.value = '';
+        uploadedIcon.src = originalIconSrc;
+    });
+
+    document.getElementById("cancelBtn").onclick = function () {
+        window.location.href = "{% url 'showCQDAdvantage' %}";
+    };
+</script>
+{% endblock %}

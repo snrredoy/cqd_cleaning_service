@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'adminCleaningService',
     'ckeditor',
     'ckeditor_uploader',
+    'adminCQDAdvantage',
+    'adminContactUs',
     
 ]
 
