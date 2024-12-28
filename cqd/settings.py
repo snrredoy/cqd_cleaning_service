@@ -146,7 +146,8 @@ CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'height': 300,
+        'skin': 'moono-lisa',
+        'height': 200,
         'width': '100%',
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],

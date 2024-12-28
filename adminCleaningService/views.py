@@ -45,3 +45,54 @@ def updateCleaningServiceHeadding(request , pk):
         'breadcrumb': 'Cleaning Service',
     }
     return render(request, 'adminControl/cleaningService/updateSectionHeading.html', context=context)
+
+def addCleaningService(request):
+    if request.method == 'POST':
+        cleaningServiceForm = CleaningServiceForm(request.POST , request.FILES)
+        if cleaningServiceForm.is_valid():
+            cleaningServiceForm.save()
+            messages.success(request, 'Cleaning Service Added Successfully')
+            return redirect('showCleaningService')
+        else:
+            messages.error(request, 'Please Correct the error below.')
+            return redirect('addCleaningService')
+    else:
+        cleaningServiceForm = CleaningServiceForm()
+
+    form = GeneralForm(instance=General.objects.first())
+    context = {
+        'form': form,
+        'cleaningServiceForm': cleaningServiceForm,
+        'title': 'Add Cleaning Service',
+        'breadcrumb': 'Cleaning Service',
+    }
+    return render(request, 'adminControl/cleaningService/addCleaningService.html', context=context)
+
+def updateCleaningService(request , pk):
+    instance = CleaningService.objects.get(pk=pk)
+    if request.method == 'POST':
+        cleaningServiceForm = CleaningServiceForm(request.POST , request.FILES , instance=instance)
+        if cleaningServiceForm.is_valid():
+            cleaningServiceForm.save()
+            messages.success(request, 'Cleaning Service Updated Successfully')
+            return redirect('showCleaningService')
+        else:
+            messages.error(request, 'Please check the form again.')
+            return redirect('updateCleaningService' , pk=pk)
+    else:
+        cleaningServiceForm = CleaningServiceForm(instance=instance)
+
+    form = GeneralForm(instance=General.objects.first())
+    context = {
+        'form': form,
+        'cleaningServiceForm': cleaningServiceForm,
+        'title': 'Update Cleaning Service',
+        'breadcrumb': 'Cleaning Service',
+    }
+    return render(request, 'adminControl/cleaningService/updateCleaningService.html', context=context)
+
+def deleteCleaningService(request , pk):
+    instance = CleaningService.objects.get(pk=pk)
+    instance.delete()
+    messages.success(request, 'Cleaning Service Deleted Successfully')
+    return redirect('showCleaningService')

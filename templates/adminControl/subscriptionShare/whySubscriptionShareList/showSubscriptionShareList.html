@@ -74,7 +74,7 @@
 
 {% if messages %}
 {% for message in messages %}
-<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% else %}bg-success text-white{% endif %}"
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'success' %}bg-success text-white{% endif %}"
     role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
     style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
     <div class="toast-header">
@@ -89,7 +89,6 @@
 </div>
 {% endfor %}
 {% endif %}
-
 
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

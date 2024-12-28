@@ -1,0 +1,45 @@
+{% load static %}
+
+<div
+    class="inline-flex flex-col justify-center items-center px-[262px] py-[120px] rounded-2xl bg-gradient-to-b from-[rgba(133,210,255,0.60)] to-[rgba(214,238,255,0.60)] w-[97%] mx-[28px]">
+    <span class="text-[#0459E5] font-medium mb-4 text-center font-poppins font-feature-no-ligatures">Suit Every Need
+    </span>
+    <span
+        class="text-5xl font-semibold text-[#0F2A5C] text-center mb-10 font-poppins self-stretch font-feature-no-ligatures">
+        {{ cleaningServiceHeadding.title | safe }}</span>
+
+    <div class="flex flex-wrap gap-8 justify-between self-stretch">
+        {% for cleaningService in cleaningServices %}
+        <div class="rounded-[12px] bg-[#FFF] flex flex-col items-start p-6 gap-2 max-w-[calc(33%_-_8px)] relative">
+            <div class="flex justify-between items-center w-full ">
+                <div class="rounded-[59.733px] border border-[#0459E5] flex w-16 h-16 p-4 justify-center items-center">
+                    <img src="{{ cleaningService.icon.url }}" alt="icon">
+                </div>
+
+                <div class="z-10 absolute top-[-20px] right-[10px]">
+                    <img src="{{ cleaningService.watermarkIcon.url }}" alt="icon" class="w-[160px]">
+                </div>
+            </div>
+            <div class="bg-[#C1C4CC] w-[50%] h-px"></div>
+            <span class="text-[#0F2A5C] font-semibold text-xl font-poppins self-stretch font-feature-no-ligatures">
+                {{ cleaningService.title | safe }}</span>
+            <span class="text-[#5B6477] font-normal text-base font-poppins self-stretch font-feature-no-ligatures">
+                {{ cleaningService.description | safe }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="flex mt-8 self-center">
+        <button class="bg-[#02B71F] py-4 rounded-full text-white flex justify-between px-8 font-medium text-lg">
+            {{ generalData.buttonText }}
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
+                class="ml-1 mt-[2px]">
+                <path d="M5 12.5H19H5Z" fill="#0F2A5C" />
+                <path d="M13 18.5L19 12.5L13 18.5Z" fill="#0F2A5C" />
+                <path d="M13 6.5L19 12.5L13 6.5Z" fill="#0F2A5C" />
+                <path d="M5 12.5H19M19 12.5L13 18.5M19 12.5L13 6.5" stroke="#EEFFEF" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+</div>

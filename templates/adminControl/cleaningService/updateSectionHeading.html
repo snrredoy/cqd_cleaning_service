@@ -1,42 +1,60 @@
 {% extends 'adminControl/adminBase.html' %}
 {% load static %}
+{% block css %}
+<style>
+    p label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: inherit;
+    }
+</style>
+{% endblock %}
 
 {% block general %}
 <div class="card mb-4">
     <h5 class="card-header">Update Section Heading</h5>
 
-    {% comment %}
     <div class="card-body">
         <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <hr class="mb-4" />
             <div class="row">
-                <div class="mb-3 col-md-6">
-                    <label for="title" class="form-label">Section Heading</label>
-                    <input class="form-control" type="text" id="title" name="title" placeholder="Title here"
-                        value="{{ sectionHeadingForm.title.value }}" autofocus />
+                <div class="mb-3 col-md-8">
                     {{ sectionHeadingForm.media }}
+                    {{ sectionHeadingForm.as_p }}
                 </div>
                 <div class="mt-2">
-                    <button id="submitBtn" type="submit" class="btn btn-primary me-2">Update</button>
-                    <button type="button" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
+                    <button type="reset" class="btn btn-outline-secondary ms-2" id="cancelBtn">Cancel</button>
                 </div>
             </div>
         </form>
     </div>
-    {% endcomment %}
+</div>
 
-    <div class="card-body">
-        <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ sectionHeadingForm.media }}
-            {{ sectionHeadingForm.as_p }}
-            <button type="submit">Update</button>
+{% if messages %}
+{% for message in messages %}
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Notification</div>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
 
-    <script>
-        document.getElementById("cancelBtn").onclick = function () {
-            window.location.href = "{% url 'showCleaningService' %}";
-        };
-    </script>
-    {% endblock %}
+<script>
+    document.getElementById("cancelBtn").onclick = function () {
+        window.location.href = "{% url 'showCleaningService' %}";
+    };
+</script>
+
+
+
+{% endblock %}

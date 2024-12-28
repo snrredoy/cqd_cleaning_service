@@ -52,7 +52,7 @@
 
 {% if messages %}
 {% for message in messages %}
-<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white{% else %}bg-success text-white{% endif %}"
+<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'success' %}bg-success text-white{% endif %}"
     role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
     style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
     <div class="toast-header">
@@ -83,8 +83,8 @@
             "paging": true,
             "searching": true,
             "ordering": true,
-            "pageLength": 4,
-            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "All"]]
+            "pageLength": 5,
+            "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
             // "order": [[1, "asc"]]  // Set default ordering on the second column
         });
     });

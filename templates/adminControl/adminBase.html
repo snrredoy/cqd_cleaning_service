@@ -8,9 +8,6 @@
   <title>
     {{ form.title.value }}
     {% block title %} {% endblock %}</title>
-
-
-  <link rel="stylesheet" href="{% static 'css/button.css' %}" />
   <!-- Data Tables -->
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
@@ -49,6 +46,8 @@
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="{% static 'assets/js/config.js' %}"></script>
+
+  {% block css %} {% endblock %}
 </head>
 
 <body>
@@ -89,9 +88,9 @@
           <li class="menu-header small text-uppercase">
             <span class="menu-header-text">General</span>
           </li>
-          <li class="menu-item {% if request.path == '/adminControl/update/10/' %}active{% endif %}">
-            <a href="{% url 'updateGeneralSetting' pk=10 %}"
-              class="menu-link {% if request.path == '/adminControl/update/10/' %}active{% endif %}">
+          <li class="menu-item {% if request.path == '/adminControl/update/1/' %}active{% endif %}">
+            <a href="{% url 'updateGeneralSetting' pk=1 %}"
+              class="menu-link {% if request.path == '/adminControl/update/1/' %}active{% endif %}">
               <i class='bx bx-building menu-icon'></i>
               <div data-i18n="CompanyDetails">Company Details</div>
             </a>
@@ -163,7 +162,7 @@
 
           <!-- Cleaning Services -->
           <li
-            class="menu-item {% if request.path == '/adminControl/cleaningService/showCleaningService/' or request.path|slice:':60' == '/adminControl/cleaningService/updateCleaningServiceHeadding/' %}active{% endif %}">
+            class="menu-item {% if request.path == '/adminControl/cleaningService/showCleaningService/' or request.path|slice:':60' == '/adminControl/cleaningService/updateCleaningServiceHeadding/' or request.path|slice:':52' == '/adminControl/cleaningService/updateCleaningService/' or request.path == '/adminControl/cleaningService/addCleaningService/' %}active{% endif %}">
             <a href="{% url 'showCleaningService' %}"
               class="menu-link {% if request.path == '/adminControl/cleaningService/showCleaningService/' %}active{% endif %}">
               <i class='bx bxs-brush menu-icon'></i>

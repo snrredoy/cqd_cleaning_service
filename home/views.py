@@ -2,6 +2,7 @@ from django.shortcuts import render
 from adminControl.models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList
 from adminSubscriptionPackage.models import SubscriptionPackage
 from adminPrivacyCore.models import PrivacyCore, PrivacyCoreImage
+from adminCleaningService.models import CleaningService , CleaningServiceHeadding
 
 # Create your views here.
 def home(request):
@@ -15,6 +16,8 @@ def home(request):
     subscriptionPackages = SubscriptionPackage.objects.all()
     privacyCores = PrivacyCore.objects.all()
     privacyCoreImage = PrivacyCoreImage.objects.first()
+    cleaningServiceHeadding = CleaningServiceHeadding.objects.first()
+    cleaningServices = CleaningService.objects.all()
 
 
     context = {
@@ -28,5 +31,7 @@ def home(request):
         'subscriptionPackages': subscriptionPackages,
         'privacyCores': privacyCores,
         'privacyCoreImage': privacyCoreImage,
+        'cleaningServiceHeadding': cleaningServiceHeadding,
+        'cleaningServices': cleaningServices,
     }
     return render(request, 'base.html' , context=context )

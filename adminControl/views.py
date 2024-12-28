@@ -19,14 +19,20 @@ def updateGeneralSetting(request , pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Update Successful')
-            return redirect('updateGeneralSetting', pk =10)
+            return redirect('updateGeneralSetting', pk =1)
         else:
             messages.error(request, 'Update Failed , Please Check the form again')
-            return redirect('updateGeneralSetting', pk =10)
+            return redirect('updateGeneralSetting', pk =1)
     else:
         form = GeneralForm(instance=instance)
 
-    return render(request, 'adminControl/generalSetting/update.html' , {'form': form , 'title': 'Update General Info' , 'breadcrumb': 'General Info'})
+    context = {
+        'form': form,
+        'title': 'Update General Info',
+        'breadcrumb': 'General Info'
+    }
+
+    return render(request, 'adminControl/generalSetting/update.html' , context = context )
 
 
 
