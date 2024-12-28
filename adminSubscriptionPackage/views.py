@@ -15,7 +15,7 @@ def addSubscriptionPackage(request):
             return redirect('showSubscriptionPackage')
         else:
             messages.error(request, 'Failed to add Subscription Package.')
-            return redirect('showSubscriptionPackage')
+            return redirect('addSubscriptionPackage')
     else:
         subscriptionPackageForm = SubscriptionPackageForm()
 
