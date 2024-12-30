@@ -29,6 +29,7 @@ urlpatterns = [
     path("adminControl/cleaningService/",include("adminCleaningService.urls")),
     path("adminControl/cqdAdvantage/",include("adminCQDAdvantage.urls")),
     path("adminControl/contactUs/",include("adminContactUs.urls")),
+    path("adminAuth/",include("adminAuth.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
