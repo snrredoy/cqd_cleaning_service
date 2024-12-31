@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import login , authenticate , logout
 from .models import CustomUser
@@ -51,3 +51,19 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Logout successful')
     return redirect('login')
+
+
+
+
+
+from django.core.mail import send_mail
+def send_email(request):
+    send_mail(
+        'Subject here',
+        'Here is the message.',
+        'snrredoy2@gmail.com',
+        ['snrredoy3@gmail.com'],
+        fail_silently=False,
+    )
+
+    return HttpResponse('Email sent successfully!')
