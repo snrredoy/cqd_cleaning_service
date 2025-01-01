@@ -4,8 +4,10 @@ from adminControl.models import General
 from .models import PrivacyCore, PrivacyCoreImage
 from adminControl.forms import GeneralForm
 from .forms import PrivacyCoreForm , PrivacyCoreImageForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def showPrivacyCore(request):
     form = GeneralForm(instance=General.objects.first())
     privacyCore = PrivacyCore.objects.all()
@@ -20,6 +22,7 @@ def showPrivacyCore(request):
     return render(request, "adminControl/privacyCore/showPrivacyCore.html", context)
 
 
+@login_required
 def updatePrivacyCore(request , pk ):
     form = GeneralForm(instance=General.objects.first())
     privacyCore = PrivacyCore.objects.get(pk=pk)

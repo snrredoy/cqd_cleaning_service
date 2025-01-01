@@ -4,8 +4,10 @@ from .models import SubscriptionPackage
 from adminControl.models import General
 from .forms import SubscriptionPackageForm
 from adminControl.forms import GeneralForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def addSubscriptionPackage(request):
     if request.method == 'POST':
         subscriptionPackageForm = SubscriptionPackageForm(request.POST , request.FILES)
@@ -30,7 +32,7 @@ def addSubscriptionPackage(request):
 
     return render(request, 'adminControl/subscriptionPackage/create.html', context=context)
 
-
+@login_required
 def showSubscriptionPackage(request):
     form = GeneralForm(instance=General.objects.first())
     subscriptionPackages = SubscriptionPackage.objects.all()
@@ -45,6 +47,7 @@ def showSubscriptionPackage(request):
     return render(request, 'adminControl/subscriptionPackage/showSubscriptionPackages.html', context=context)
 
 
+@login_required
 def updateSubscriptionPackage(request, pk):
     instance = SubscriptionPackage.objects.get(pk=pk)
     if request.method == 'POST':
@@ -70,6 +73,8 @@ def updateSubscriptionPackage(request, pk):
 
     return render(request, 'adminControl/subscriptionPackage/update.html', context=context)
 
+
+@login_required
 def deleteSubscriptionPackage(request, pk):
     subscriptionPackage = SubscriptionPackage.objects.get(pk=pk)
     subscriptionPackage.delete()

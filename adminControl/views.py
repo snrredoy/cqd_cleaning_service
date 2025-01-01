@@ -3,16 +3,25 @@ from django.shortcuts import redirect, render , get_object_or_404
 from .models import General , TrustedPartner , CommercialServices , InteractivePlatform , InteractivePlatformList , WhySubscriptionShare , WhySubscriptionShareList 
 from .forms import GeneralForm , TrustedPartnerForm , CommercialServicesForm , InteractivePlatformForm , InteractivePlatformListForm , WhySubscriptionShareForm , WhySubscriptionShareListForm  
 
+from adminAuth.models import CustomUser
+
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+@login_required
 def dashboard(request):
     form = GeneralForm(instance=General.objects.first())
 
-    return render(request, 'adminControl/dashboard/dashboard.html' , {'form': form , 'title': '' , 'breadcrumb': 'DashBoard'})
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'adminControl/dashboard/dashboard.html' , context=context)
 
 
+@login_required
 def updateGeneralSetting(request , pk):
-
     instance = get_object_or_404(General, pk=pk)
     if request.method == 'POST':
         form = GeneralForm(request.POST, request.FILES , instance= instance)
@@ -28,14 +37,12 @@ def updateGeneralSetting(request , pk):
 
     context = {
         'form': form,
-        'title': 'Update General Info',
-        'breadcrumb': 'General Info'
     }
 
     return render(request, 'adminControl/generalSetting/update.html' , context = context )
 
 
-
+@login_required
 def addTrustedPartner(request):
     if request.method == 'POST':
 
@@ -60,12 +67,16 @@ def addTrustedPartner(request):
 
     return render(request, 'adminControl/trustedPartner/create.html' , {'form': form , 'trustedForm': trustedForm , 'title': 'Add Partner' , 'breadcrumb': 'Trusted Partner'})
 
+
+@login_required
 def showTrustedPartners(request):
     form = GeneralForm(instance=General.objects.first())
     trustedPartners  = TrustedPartner.objects.all()
 
     return render(request, 'adminControl/trustedPartner/showPartners.html' , {'form': form , 'trustedPartners': trustedPartners , 'title': 'Partner List' , 'breadcrumb': 'Trusted Partner'})
 
+
+@login_required
 def updateTrustedPartner(request , pk):
     instance = get_object_or_404(TrustedPartner, pk=pk)
     if request.method == 'POST':
@@ -84,6 +95,7 @@ def updateTrustedPartner(request , pk):
 
     return render(request, 'adminControl/trustedPartner/update.html' , {'form': form , 'trustedForm': trustedForm , 'title': 'Update Partner' , 'breadcrumb': 'Trusted Partner'})
 
+@login_required
 def deleteTrustedPartner(request , pk):
     instance = get_object_or_404(TrustedPartner, pk=pk)
     instance.delete()
@@ -92,7 +104,7 @@ def deleteTrustedPartner(request , pk):
 
 
 
-
+@login_required
 def addCommercialServices(request):
     if request.method == 'POST':
         commercialServicesForm = CommercialServicesForm(request.POST , request.FILES)
@@ -111,6 +123,7 @@ def addCommercialServices(request):
     return render(request, 'adminControl/commercialServices/create.html' , {'form': form , 'commercialServicesForm': commercialServicesForm , 'title': 'Add Commercial Service' , 'breadcrumb': 'Commercial Service'})
 
 
+@login_required
 def showCommercialServices(request):
     form = GeneralForm(instance=General.objects.first())
     commercialServices  = CommercialServices.objects.all()
@@ -119,6 +132,7 @@ def showCommercialServices(request):
 
 
 
+@login_required
 def updateCommercialServices(request , pk):
     instance = CommercialServices.objects.get(pk=pk)
     if request.method == 'POST':
@@ -145,12 +159,15 @@ def updateCommercialServices(request , pk):
     return render(request, 'adminControl/commercialServices/update.html' , context = context )
 
 
+@login_required
 def deleteCommercialServices(request , pk):
     instance = get_object_or_404(CommercialServices, pk=pk)
     instance.delete()
     messages.success(request, 'Service Deleted Successfully')
     return redirect('showCommercialServices')
 
+
+@login_required
 def showInteractivePlatform(request):
     form = GeneralForm(instance=General.objects.first())
     interactivePlatform  = InteractivePlatform.objects.all()
@@ -166,7 +183,7 @@ def showInteractivePlatform(request):
 
     return render(request, 'adminControl/interactivePlatform/showInteractivePlatform.html' , context = context)
 
-
+@login_required
 def updateInteractivePlatformList(request, pk):
     instance = InteractivePlatformList.objects.get( pk=pk )
     platformInstance = InteractivePlatform.objects.get( pk=1 )
@@ -201,6 +218,7 @@ def updateInteractivePlatformList(request, pk):
     return render(request, 'adminControl/interactivePlatform/update.html', context=context)
 
 
+@login_required
 def updateWhySubscriptionShare(request , pk):
     instance = WhySubscriptionShare.objects.get( pk=pk )
     if request.method == 'POST':
@@ -228,6 +246,7 @@ def updateWhySubscriptionShare(request , pk):
     return render(request, 'adminControl/subscriptionShare/whySubscriptionShare/update.html', context=context)
 
 
+@login_required
 def showWhySubscriptionShareList(request):
     form = GeneralForm(instance=General.objects.first())
     whySubscriptionShare = WhySubscriptionShare.objects.first()
@@ -243,6 +262,8 @@ def showWhySubscriptionShareList(request):
 
     return render(request ,'adminControl\subscriptionShare\whySubscriptionShareList\showSubscriptionShareList.html', context=context)
 
+
+@login_required
 def updateWhySubscriptionShareList(request , pk):
     instance = WhySubscriptionShareList.objects.get( pk=pk )
     if request.method == 'POST':

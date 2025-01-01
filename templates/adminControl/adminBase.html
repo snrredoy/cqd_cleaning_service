@@ -8,12 +8,13 @@
   <title>
     {{ form.title.value }}
     {% block title %} {% endblock %}</title>
-  <!-- Data Tables -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 
+
+  <!-- Data Tables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
   <!-- /Data Tables -->
+
   <!-- Box icons -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -41,6 +42,13 @@
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="{% static 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css' %}" />
   <link rel="stylesheet" href="{% static 'assets/vendor/libs/apex-charts/apex-charts.css' %}" />
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Dropify CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropify/dist/css/dropify.min.css">
+
 
 
   <!-- Helpers -->
@@ -239,7 +247,9 @@
               <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                   <div class="avatar avatar-online">
-                    <img src="{% static 'assets/img/avatars/1.png' %}" alt class="w-px-40 h-auto rounded-circle" />
+                    <img
+                      src="{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'assets/img/avatars/1.png' %}{% endif %}"
+                      alt class="w-px-40 h-auto rounded-circle" />
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -248,13 +258,15 @@
                       <div class="d-flex">
                         <div class="flex-shrink-0 me-3">
                           <div class="avatar avatar-online">
-                            <img src="{% static 'assets/img/avatars/1.png' %}" alt
-                              class="w-px-40 h-auto rounded-circle" />
+                            <img
+                              src="{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'assets/img/avatars/1.png' %}{% endif %}"
+                              alt class="w-px-40 h-auto rounded-circle" />
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-semibold d-block">John Doe</span>
-                          <small class="text-muted">Admin</small>
+                          <span class="fw-semibold d-block">{{ user.first_name }} {{ user.last_name }}</span>
+                          <small class="text-muted">
+                            {% if user.is_superuser %}Super Admin{% else %}Admin{% endif %}</small>
                         </div>
                       </div>
                     </a>
@@ -263,31 +275,17 @@
                     <div class="dropdown-divider"></div>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{% url 'update_profile' %}?next={{ request.path }}"
+                      data-bs-toggle="modal" data-bs-target="#profileModal">
                       <i class="bx bx-user me-2"></i>
                       <span class="align-middle">My Profile</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-cog me-2"></i>
-                      <span class="align-middle">Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="d-flex align-items-center align-middle">
-                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                        <span class="flex-grow-1 align-middle">Billing</span>
-                        <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      </span>
                     </a>
                   </li>
                   <li>
                     <div class="dropdown-divider"></div>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="auth-login-basic.html">
+                    <a class="dropdown-item" href="{% url 'logout' %}">
                       <i class="bx bx-power-off me-2"></i>
                       <span class="align-middle">Log Out</span>
                     </a>
@@ -298,6 +296,47 @@
             </ul>
           </div>
         </nav>
+
+        <!-- Profile Modal -->
+        <div class="modal fade" id="profileModal" data-bs-backdrop="static" tabindex="-1">
+          <div class="modal-dialog">
+            <form method="POST" action="{% url 'update_profile' %}" enctype="multipart/form-data" class="modal-content">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ request.path }}">
+              <div class="modal-header">
+                <h5 class="modal-title">Update Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input type="text" id="first_name" name="first_name" class="form-control"
+                      placeholder="Enter First Name" value="{{ user.first_name }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" class="form-control"
+                      placeholder="Enter Last Name" value="{{ user.last_name }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="profile_image" class="form-label">Profile Image</label>
+                    <input type="file" id="profile_image" name="profile_image" class="form-control dropify"
+                      data-default-file="{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'assets/img/avatars/1.png' %}{% endif %}">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
 
         <!-- / Navbar -->
 
@@ -343,6 +382,26 @@
   </div>
   <!-- / Layout wrapper -->
 
+
+  {% if messages %}
+  {% for message in messages %}
+  <div
+    class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'error' %}bg-danger text-white {% else %}bg-success text-white{% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
+    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div class="toast-header">
+      <i class="bx bx-bell me-2"></i>
+      <div class="me-auto fw-semibold">Notification</div>
+      <small>Just now</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      {{ message }}
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
   <!-- Core JS -->
   <!-- build:js assets/vendor/js/core.js -->
   <script src="{% static 'assets/vendor/libs/jquery/jquery.js' %}"></script>
@@ -353,6 +412,8 @@
   <script src="{% static 'assets/vendor/js/menu.js' %}"></script>
   <!-- endbuild -->
 
+
+
   <!-- Vendors JS -->
   <script src="{% static 'assets/vendor/libs/apex-charts/apexcharts.js' %}"></script>
 
@@ -361,20 +422,40 @@
   <script src="{% static 'assets/js/main.js' %}"></script>
 
   <!-- Page JS -->
-  <script src="{% static 'assets/js/pages-account-settings-account.js' %}"></script>
   <script src="{% static 'assets/js/dashboards-analytics.js' %}"></script>
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="{% static 'assets/js/pages-account-settings-account.js' %}"></script>
+  <script src="{% static 'assets/js/ui-modals.js' %}"></script>
+
+  <!-- jQuery (make sure this comes first) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
 
+  <!-- Boxicons JS -->
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
+  <!-- DataTables JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+
+
+
+
+  <!-- Dropify JS -->
+  <script src="https://cdn.jsdelivr.net/npm/dropify/dist/js/dropify.min.js"></script>
+
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
   <script>
+
+    $(document).ready(function () {
+      $('#example').DataTable();
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
       var toastElements = document.querySelectorAll('.toast');
       toastElements.forEach(function (toastElement) {
@@ -382,10 +463,23 @@
         toast.show();
       });
     });
+
+
+    $(document).ready(function () {
+      // Initialize Dropify
+      $('.dropify').dropify({
+        messages: {
+          'default': '<span class="fs-3">Drag and drop a file here or click</span>',
+          'replace': 'Drag and drop or click to replace',
+          'remove': 'Remove',
+          'error': 'Ooops, something went wrong.'
+        },
+        error: {
+          'fileSize': 'The file size is too big ({{ 1MB }} max).',
+        }
+      });
+    });
   </script>
-
-
-
 
   {% block js %} {% endblock %}
 </body>

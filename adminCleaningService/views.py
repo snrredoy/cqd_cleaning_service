@@ -4,8 +4,9 @@ from .models import CleaningServiceHeadding , CleaningService
 from adminControl.models import General
 from .forms import CleaningServiceHeaddingForm , CleaningServiceForm
 from adminControl.forms import GeneralForm
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def showCleaningService(request):
     form = GeneralForm(instance=General.objects.first())
     cleaningServices = CleaningService.objects.all()
@@ -21,7 +22,7 @@ def showCleaningService(request):
 
     return render(request, 'adminControl/cleaningService/showCleaningService.html', context=context)
 
-# Create your views here.
+@login_required
 def updateCleaningServiceHeadding(request , pk):
 
     instance = CleaningServiceHeadding.objects.get(pk=pk)
@@ -46,6 +47,7 @@ def updateCleaningServiceHeadding(request , pk):
     }
     return render(request, 'adminControl/cleaningService/updateSectionHeading.html', context=context)
 
+@login_required
 def addCleaningService(request):
     if request.method == 'POST':
         cleaningServiceForm = CleaningServiceForm(request.POST , request.FILES)
@@ -68,6 +70,7 @@ def addCleaningService(request):
     }
     return render(request, 'adminControl/cleaningService/addCleaningService.html', context=context)
 
+@login_required
 def updateCleaningService(request , pk):
     instance = CleaningService.objects.get(pk=pk)
     if request.method == 'POST':
@@ -91,6 +94,7 @@ def updateCleaningService(request , pk):
     }
     return render(request, 'adminControl/cleaningService/updateCleaningService.html', context=context)
 
+@login_required
 def deleteCleaningService(request , pk):
     instance = CleaningService.objects.get(pk=pk)
     instance.delete()

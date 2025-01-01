@@ -4,8 +4,10 @@ from .models import CQDAdvantage , CQDAdvantageSection
 from adminControl.models import General
 from .forms import CQDAdvantageForm , CQDAdvantageSectionForm
 from adminControl.forms import GeneralForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def showCQDAdvantage(request):
     form = GeneralForm(instance=General.objects.first())
     cqdAdvantageSection = CQDAdvantageSection.objects.first()
@@ -21,6 +23,7 @@ def showCQDAdvantage(request):
 
     return render(request, 'adminControl/cqdAdvantage/showCQDAdvantage.html', context=context)
 
+@login_required
 def updateCQDAdvantageSection(request , pk):
     instance = CQDAdvantageSection.objects.get(pk=pk)
     if request.method == 'POST':
@@ -46,6 +49,7 @@ def updateCQDAdvantageSection(request , pk):
 
     return render(request, 'adminControl/cqdAdvantage/updateCQDAdvantageSection.html', context=context)
 
+@login_required
 def addCQDAdvantage(request):
     if request.method == 'POST':
         cqdAdvantageForm = CQDAdvantageForm(request.POST , request.FILES)
@@ -70,6 +74,7 @@ def addCQDAdvantage(request):
 
     return render(request, 'adminControl/cqdAdvantage/addCQDAdvantage.html', context=context)
 
+@login_required
 def updateCQDAdvantage(request , pk):
     instance = CQDAdvantage.objects.get(pk=pk)
     if request.method == 'POST':
@@ -95,6 +100,7 @@ def updateCQDAdvantage(request , pk):
 
     return render(request, 'adminControl/cqdAdvantage/updateCQDAdvantage.html', context=context)
 
+@login_required
 def deleteCQDAdvantage(request , pk):
     instance = CQDAdvantage.objects.get(pk=pk)
     instance.delete()

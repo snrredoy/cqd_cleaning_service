@@ -11,6 +11,7 @@ urlpatterns = [
     path('register/', views.register_view, name="register"),
     path('login/', views.login_view, name="login"),
     path('send_email/', views.send_email, name="send_email"),
+    path('profileUpdate/', views.update_profile, name="update_profile"),
     path('logout/', views.logout_view, name="logout"),
 
     path('password_reset/', auth_views.PasswordResetView.as_view( template_name='adminControl/adminCreation/password_reset_form.html'), name='password_reset'),

@@ -19,7 +19,7 @@
             <tbody>
                 {% for contact in contactUs %}
                 <tr>
-                    <td class="text-center">{{ contact.id }}</td>
+                    <td class="text-center">{{ forloop.counter }}</td>
                     <td class="">
                         <div class="shadow bg-body-tertiary rounded p-1" style="width: 150px;">
                             <img src="{{ contact.image.url }}" alt="Icon" style="width: 100%;">
@@ -62,8 +62,9 @@
 {% endif %}
 
 
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 

@@ -99,7 +99,19 @@
 
         <!-- Page JS -->
 
+    <script src="{% static 'assets/js/ui-modals.js' %}"></script>
+
         <!-- Place this tag in your head or just before your close body tag. -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            var toastElements = document.querySelectorAll('.toast');
+            toastElements.forEach(function (toastElement) {
+              var toast = new bootstrap.Toast(toastElement);
+              toast.show();
+            });
+          });
+        </script>
     </body>
 </html>
