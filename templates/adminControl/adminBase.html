@@ -249,7 +249,7 @@
                   <div class="avatar avatar-online">
                     <img
                       src="{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'assets/img/avatars/1.png' %}{% endif %}"
-                      alt class="w-px-40 h-auto rounded-circle" />
+                      alt class="w-px-40 rounded-circle" />
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -260,7 +260,7 @@
                           <div class="avatar avatar-online">
                             <img
                               src="{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'assets/img/avatars/1.png' %}{% endif %}"
-                              alt class="w-px-40 h-auto rounded-circle" />
+                              alt class="w-px-40  rounded-circle" />
                           </div>
                         </div>
                         <div class="flex-grow-1">
@@ -347,7 +347,6 @@
           <div class="container-xxl flex-grow-1 container-p-y">
             <!-- Layout Demo -->
             {% block general %}{% endblock %}
-            {% block second %}{% endblock %}
             <div class="layout-demo-wrapper">
               <div class="layout-demo-placeholder"></div>
             </div>

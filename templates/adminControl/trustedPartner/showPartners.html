@@ -2,19 +2,19 @@
 {% load static %}
 
 {% block general %}
-
 <div class="card mb-4">
-
-
     <div class="card-body">
-        <h1>Show Trusted Partners</h1>
-        <div class="float-end mb-3">
+        <!-- Header Section -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Show Trusted Partners</h3>
             <a href="{% url 'addTrustedPartner' %}">
-                <button class="btn btn-info">Add Trusted Partner</button>
+                <button class="btn btn-info btn-sm">Add Trusted Partner</button>
             </a>
         </div>
-        <table id="example" class="display" style="width:100%">
-            <thead>
+
+        <!-- DataTable -->
+        <table id="example" class="table table-hover table-striped ">
+            <thead class="table-light">
                 <tr>
                     <th class="text-center w-px-20">Partner No</th>
                     <th class="text-center">Partners Logo</th>
@@ -24,69 +24,62 @@
             <tbody>
                 {% for trustedPartner in trustedPartners %}
                 <tr>
+                    <!-- Partner Number -->
                     <td class="text-center">{{ forloop.counter }}</td>
+
+                    <!-- Partner Logo -->
                     <td class="d-flex justify-content-center align-items-center">
                         <div class="shadow p-1 bg-body-tertiary rounded" style="width: 120px;">
-                            <img class="" src=" {{ trustedPartner.partner_one.url }}" alt="Image of Trusted Partner"
-                                style="width: 100%;">
+                            <img class="img-fluid" src="{{ trustedPartner.partner_one.url }}"
+                                alt="Image of Trusted Partner" style="width: 100%;">
                         </div>
                     </td>
 
+                    <!-- Actions -->
                     <td class="text-center">
-                        <a href="{% url 'updateTrustedPartner' trustedPartner.pk %}">
-                            <button class="btn btn-primary">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
+                        <a href="{% url 'updateTrustedPartner' trustedPartner.pk %}"
+                            class="btn btn-primary btn-sm me-2">
+                            <i class="fa-solid fa-pen"></i>
                         </a>
-
-                        <a href="{% url 'deleteTrustedPartner' trustedPartner.pk %}">
-                            <button class="btn btn-danger">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                        <a href="{% url 'deleteTrustedPartner' trustedPartner.pk %}" class="btn btn-danger btn-sm">
+                            <i class="fa-solid fa-trash"></i>
                         </a>
                     </td>
-
                 </tr>
                 {% endfor %}
+            </tbody>
         </table>
     </div>
 </div>
 
+<!-- Toast Notifications -->
 {% if messages %}
 {% for message in messages %}
-<div class="bs-toast toast toast-placement-ex m-2 show fade {% if message.tags == 'success' %}bg-success text-white{% endif %}"
-    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000"
-    style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
-    <div class="toast-header">
-        <i class="bx bx-bell me-2"></i>
-        <div class="me-auto fw-semibold">Notification</div>
-        <small>Just now</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-        {{ message }}
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+    <div class="toast show align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">{{ message }}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
+        </div>
     </div>
 </div>
 {% endfor %}
 {% endif %}
 
-
-
+<!-- jQuery and DataTables JS -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 
-
-
-
-<script type="text/javascript">
+<script>
     $(document).ready(function () {
         $('#example').DataTable({
             "paging": true,
             "searching": true,
             "ordering": true,
             "pageLength": 4,
-            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "All"]]
-            // "order": [[1, "asc"]]  // Set default ordering on the second column
+            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "All"]],
         });
     });
 </script>
