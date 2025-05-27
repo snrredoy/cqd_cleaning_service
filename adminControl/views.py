@@ -260,7 +260,7 @@ def showWhySubscriptionShareList(request):
         'breadcrumb': 'Subscription Share'
     }
 
-    return render(request ,'adminControl\subscriptionShare\whySubscriptionShareList\showSubscriptionShareList.html', context=context)
+    return render(request ,'adminControl/subscriptionShare/whySubscriptionShareList/showSubscriptionShareList.html', context=context)
 
 
 @login_required
