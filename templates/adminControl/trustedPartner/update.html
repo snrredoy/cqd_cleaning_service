@@ -16,7 +16,7 @@
             {% else %}
             <div class="card-body">
                 <div class="d-flex align-items-start align-items-sm-center gap-4">
-                    <img src="http://127.0.0.1:8000/media/{{ trustedForm.partner_one.value }}" alt="user-avatar"
+                    <img src="{{ current_domain }}/media/{{ trustedForm.partner_one.value }}" alt="user-avatar"
                         class="d-block rounded" width="100" id="uploadedAvatar" />
                     <div class="button-wrapper">
                         <label for="partner_one" class="btn btn-primary me-2 mb-4" tabindex="0">

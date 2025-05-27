@@ -29,7 +29,7 @@
     rel="stylesheet" />
 
   <!-- FavIcon -->
-  <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8000/media/{{ form.favicon.value }}">
+  <link rel="icon" type="image/x-icon" href="{{ current_domain }}/media/{{ form.favicon.value }}">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -71,7 +71,7 @@
         <div class="app-brand demo">
           <a href="#" class="app-brand-link">
             <span class="app-brand-logo demo">
-              <img src="http://127.0.0.1:8000/media/{{ form.favicon.value }}" alt="Admin Panel"
+              <img src="{{ current_domain }}/media/{{ form.favicon.value }}" alt="Admin Panel"
                 style="width: 30px; height: 30px" />
             </span>
             <span class="app-brand-text fs-2 menu-text fw-bolder ms-3">{{ form.title.value }}</span>

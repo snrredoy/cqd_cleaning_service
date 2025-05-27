@@ -12,7 +12,7 @@
             <div class="d-flex">
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="http://127.0.0.1:8000/media/{{ commercialServicesForm.icon.value }}" alt="user-avatar"
+                        <img src="{{ current_domain }}/media/{{ commercialServicesForm.icon.value }}" alt="user-avatar"
                             class="d-block rounded p-2" width="60px" id="uploadedIcon" />
                         <div class="button-wrapper">
                             <label for="icon" class="btn btn-primary me-2 mb-4" tabindex="0">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="http://127.0.0.1:8000/media/{{ commercialServicesForm.wattermarkIcon.value }}"
+                        <img src="{{ current_domain }}/media/{{ commercialServicesForm.wattermarkIcon.value }}"
                             alt="user-avatar" class="d-block rounded border" width="100px"
                             id="uploadedWattermarkIcon" />
                         <div class="button-wrapper">

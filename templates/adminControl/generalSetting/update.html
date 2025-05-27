@@ -12,7 +12,7 @@
             <div class="d-flex">
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="http://127.0.0.1:8000/media/{{ form.favicon.value }}" alt="user-avatar"
+                        <img src="{{ current_domain }}/media/{{ form.favicon.value }}" alt="user-avatar"
                             class="d-block rounded" height="100" width="100" id="uploadedFavicon" />
                         <div class="button-wrapper">
                             <label for="favicon" class="btn btn-primary me-2 mb-4" tabindex="0">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="http://127.0.0.1:8000/media/{{ form.navLogo.value }}" alt="user-avatar"
+                        <img src="{{ current_domain }}/media/{{ form.navLogo.value }}" alt="user-avatar"
                             class="d-block rounded  bg-dark p-2" height="100" width="100" id="uploadedNavLogo" />
                         <div class="button-wrapper">
                             <label for="navLogo" class="btn btn-primary me-2 mb-4" tabindex="0">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="http://127.0.0.1:8000/media/{{ form.banner.value }}" alt="user-avatar"
+                        <img src="{{ current_domain }}/media/{{ form.banner.value }}" alt="user-avatar"
                             class="d-block rounded" width="100" id="uploadedBanner" />
                         <div class="button-wrapper">
                             <label for="banner" class="btn btn-primary me-2 mb-4" tabindex="0">
@@ -170,19 +170,19 @@
 
     // Reset function for Favicon
     document.getElementById('resetFavicon').onclick = function () {
-        document.getElementById('uploadedFavicon').src = 'http://127.0.0.1:8000/media/{{ form.favicon.value }}';
+        document.getElementById('uploadedFavicon').src = '{{ current_domain }}/media/{{ form.favicon.value }}';
         document.getElementById('favicon').value = '';  // Reset the file input
     };
 
     // Reset function for Nav Logo
     document.getElementById('resetNavLogo').onclick = function () {
-        document.getElementById('uploadedNavLogo').src = 'http://127.0.0.1:8000/media/{{ form.navLogo.value }}';
+        document.getElementById('uploadedNavLogo').src = '{{ current_domain }}/media/{{ form.navLogo.value }}';
         document.getElementById('navLogo').value = '';  // Reset the file input
     };
 
     // Reset function for Banner
     document.getElementById('resetBanner').onclick = function () {
-        document.getElementById('uploadedBanner').src = 'http://127.0.0.1:8000/media/{{ form.banner.value }}';
+        document.getElementById('uploadedBanner').src = '{{ current_domain }}/media/{{ form.banner.value }}';
         document.getElementById('banner').value = '';  // Reset the file input
     };
 </script>

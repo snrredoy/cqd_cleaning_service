@@ -17,7 +17,7 @@
             <div class="d-flex">
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4 ">
-                        <img src="http://127.0.0.1:8000/media/{{ contactUsForm.image.value }}" alt="upload icon to show"
+                        <img src="{{ current_domain }}/media/{{ contactUsForm.image.value }}" alt="upload icon to show"
                             class="d-block rounded p-1 " width="150px" id="uploadedImage" />
                         <div class="button-wrapper">
                             <label for="image" class="btn btn-primary me-2 mb-4" tabindex="0">

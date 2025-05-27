@@ -9,7 +9,7 @@
             <div class="d-flex">
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="http://127.0.0.1:8000/media/{{ interactivePlatformForm.image.value }}"
+                        <img src="{{ current_domain }}/media/{{ interactivePlatformForm.image.value }}"
                             alt="user-avatar" class="d-block rounded" width="90px" id="uploadedImage" />
                         <div class="button-wrapper">
                             <label for="image" class="btn btn-primary me-2 mb-4" tabindex="0">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="http://127.0.0.1:8000/media/{{ interactivePlatformListForm.icon.value }}"
+                        <img src="{{ current_domain }}/media/{{ interactivePlatformListForm.icon.value }}"
                             alt="user-avatar" class="d-block rounded p-2" width="50px" id="uploadedIcon" />
                         <div class="button-wrapper">
                             <label for="icon" class="btn btn-primary me-2 mb-4" tabindex="0">
